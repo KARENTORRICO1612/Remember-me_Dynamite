@@ -1,6 +1,8 @@
 package com.cdp.agenda;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity  {
     private RequestQueue requestQueue;
     private ArrayList<String> listAdultos;
 
+    //para control de sesion NOTOCAR
+    SharedPreferences sp;
+    //notocar
+
     SearchView txtBuscar;
     //RecyclerView listaContactos;
     ArrayList<Contactos> listaArrayContactos;
@@ -61,6 +67,9 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.programar);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//para bloquear el giro de pantalla
+        sp=getSharedPreferences("PruebaLogin", Context.MODE_PRIVATE);
+
         requestQueue= Volley.newRequestQueue(this);
         listAdultos=new ArrayList<String>();
         //recibimos los valores
@@ -70,7 +79,8 @@ public class MainActivity extends AppCompatActivity  {
         nameGetR=getUserR.getString("usuarioLogin");
         passwordGetR=getContraR.getString("contraseniaLogin");
         //fin, ahora pueden usar las variables nameGetR,passwordGetR como requieran
-        
+
+        Toast.makeText(MainActivity.this, "Bienvenido "+nameGetR, Toast.LENGTH_LONG).show();
 
         //inicializar componentes
         spinner = findViewById(R.id.spinner);
@@ -165,16 +175,26 @@ public class MainActivity extends AppCompatActivity  {
         //evaluar para que nos traiga el id del elemento del menu selecionado
         switch (item.getItemId()){
             case R.id.idCerrar:
-                llevarLogin();
+                cerrarSR();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-    private void llevarLogin(){
-        Intent intent = new Intent(this, LoginActivity.class);
+    public void cerrarSR(){
+
+        //para insertar datos
+        SharedPreferences.Editor spe = sp.edit();
+        spe.putString("user","null");
+        spe.putString("pass","null");
+        spe.putString("rol","null");
+        spe.commit();
+
+        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
         startActivity(intent);
+        finish();
+
     }
 
     private void buscarAdultos(String URL){

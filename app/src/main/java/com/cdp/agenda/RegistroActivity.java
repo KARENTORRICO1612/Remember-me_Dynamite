@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -45,7 +46,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//para bloquear el giro de pantalla
         requestQueue = Volley.newRequestQueue(this);
 
         initUi();
@@ -185,5 +186,6 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     public void volverLogin(View view){
         Intent intent= new Intent(RegistroActivity.this,LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 }

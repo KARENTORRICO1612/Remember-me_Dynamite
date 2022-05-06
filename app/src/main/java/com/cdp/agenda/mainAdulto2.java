@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
@@ -33,11 +35,18 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
     //para guardar los valores recibidos de login
     String nameGetA,passwordGetA;
     ///fin
+
+    //para el control de sesion NO TOCAR
+    SharedPreferences sp;
+    //no tocar
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_adulto2);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//para bloquear el giro de pantalla
+
+        sp=getSharedPreferences("PruebaLogin", Context.MODE_PRIVATE);
 
         txtBuscar = findViewById(R.id.txtBuscar);
         listaContactos = findViewById(R.id.listaContactos);
@@ -51,6 +60,8 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         nameGetA=getUserA.getString("usuarioLogin");
         passwordGetA=getContraA.getString("contraseniaLogin");
         //fin, ahora pueden usar las variables nameGetA,passwordGetA como requieran
+
+        Toast.makeText(mainAdulto2.this, "Bienvenido "+nameGetA, Toast.LENGTH_LONG).show();
 
         DbContactos dbContactos = new DbContactos(mainAdulto2.this);
 
@@ -79,16 +90,26 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
        //evaluar para que nos traiga el id del elemento del menu selecionado
         switch (item.getItemId()){
             case R.id.idCerrar:
-                llevarLogin();
+                cerrarS();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-    private void llevarLogin(){
-        Intent intent = new Intent(this, LoginActivity.class);
+    public void cerrarS(){
+
+        //para insertar datos
+        SharedPreferences.Editor spe = sp.edit();
+        spe.putString("user","null");
+        spe.putString("pass","null");
+        spe.putString("rol","null");
+        spe.commit();
+
+        Intent intent=new Intent(mainAdulto2.this,LoginActivity.class);
         startActivity(intent);
+        finish();
+
     }
 
     private void nuevoRegistro(){
