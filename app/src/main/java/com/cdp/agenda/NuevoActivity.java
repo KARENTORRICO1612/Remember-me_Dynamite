@@ -106,7 +106,7 @@ public class NuevoActivity extends AppCompatActivity {
 
 
 
-                    Toast.makeText(NuevoActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(NuevoActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
 
                     long id = dbContactos.insertarContacto(titulo,time,fecha,direccion,descripcion);
 

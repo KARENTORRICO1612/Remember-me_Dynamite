@@ -45,7 +45,7 @@
         <activity
 
             android:name=".NuevoActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".mainAdulto2"/>
 
         <activity
             android:name=".LoginActivity"
@@ -69,7 +69,7 @@
         </activity>
         <activity
             android:name=".VerActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".mainAdulto2">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

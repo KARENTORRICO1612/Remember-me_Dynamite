@@ -144,7 +144,7 @@ public class programareventodeAdultoMayor extends AppCompatActivity {
                     if(id!=0){
                         Toast.makeText(programareventodeAdultoMayor.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
                         verRegistro();
-                        Intent intent = new Intent(actividad, mainAdulto2.class);
+                        Intent intent = new Intent(programareventodeAdultoMayor.this, mainAdulto2.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(programareventodeAdultoMayor.this, "ERROR AL REGISTRAR ACTIVIDAD", Toast.LENGTH_LONG).show();
@@ -160,7 +160,7 @@ public class programareventodeAdultoMayor extends AppCompatActivity {
     }
 
     private void verRegistro(){
-        Intent intent = new Intent(this, VerActivity.class);
+        Intent intent = new Intent(programareventodeAdultoMayor.this, VerActivity.class);
         intent.putExtra("ID", id);
         startActivity(intent);
     }

@@ -53,15 +53,15 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         fabNuevo = findViewById(R.id.favNuevo);
         listaContactos.setLayoutManager(new LinearLayoutManager(this));
 
-        //recibimos los valores
-        getUserA=getIntent().getExtras();
-        getContraA=getIntent().getExtras();
-        //guardamos los valores
-        nameGetA=getUserA.getString("usuarioLogin");
-        passwordGetA=getContraA.getString("contraseniaLogin");
-        //fin, ahora pueden usar las variables nameGetA,passwordGetA como requieran
-
-        Toast.makeText(mainAdulto2.this, "Bienvenido "+nameGetA, Toast.LENGTH_LONG).show();
+        if(getIntent().getExtras()!=null){
+            //recibimos los valores
+            getUserA=getIntent().getExtras();
+            getContraA=getIntent().getExtras();
+            //guardamos los valores
+            nameGetA=getUserA.getString("usuarioLogin");
+            passwordGetA=getContraA.getString("contraseniaLogin");
+            //fin, ahora pueden usar las variables nameGetA,passwordGetA como requieran
+        }
 
         DbContactos dbContactos = new DbContactos(mainAdulto2.this);
 

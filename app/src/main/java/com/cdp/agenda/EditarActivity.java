@@ -42,6 +42,8 @@ public class EditarActivity extends AppCompatActivity {
 
     private int HORA, MINUTO, DIA, MES, GESTION;
 
+    Bundle extras;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,8 @@ public class EditarActivity extends AppCompatActivity {
 
         actividad=this;
 
-        aHora=(Button)findViewById(R.id.aHora);
-        aFecha=(Button)findViewById(R.id.aFecha);
+        aHora=findViewById(R.id.aHora);
+        aFecha=findViewById(R.id.aFecha);
         eHora= findViewById(R.id.eHora);
         eFecha= findViewById(R.id.eFecha);
         aHora.setOnClickListener(this::onClick);
@@ -70,7 +72,7 @@ public class EditarActivity extends AppCompatActivity {
         fabEliminar.setVisibility(View.INVISIBLE);
 
         if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
+            extras = getIntent().getExtras();
             if (extras == null) {
                 id = Integer.parseInt(null);
             } else {
@@ -115,13 +117,14 @@ public class EditarActivity extends AppCompatActivity {
 
                     Utils.setAlarm(alarmID, today.getTimeInMillis(), EditarActivity.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString(), eFecha.getText().toString(), eHora.getText().toString(),txtDireccion.getText().toString());
 
-                    Toast.makeText(EditarActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
+                   // Toast.makeText(EditarActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
 
                     if(correcto){
                         Toast.makeText(EditarActivity.this, "REGISTRO MODIFICADO", Toast.LENGTH_LONG).show();
-                        verRegistro();
-                        Intent intent = new Intent(actividad, mainAdulto2.class);
+                        //verRegistro();
+                        Intent intent = new Intent(EditarActivity.this, mainAdulto2.class);
                         startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(EditarActivity.this, "ERROR AL MODIFICAR REGISTRO", Toast.LENGTH_LONG).show();
                     }

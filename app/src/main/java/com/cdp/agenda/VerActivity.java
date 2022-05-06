@@ -79,6 +79,7 @@ public class VerActivity extends AppCompatActivity {
                 Intent intent = new Intent(VerActivity.this, EditarActivity.class);
                 intent.putExtra("ID", id);
                 startActivity(intent);
+                //finish();
             }
         });
 
@@ -108,7 +109,8 @@ public class VerActivity extends AppCompatActivity {
     }
 
     private void lista(){
-        Intent intent = new Intent(this, mainAdulto2.class);
+        Intent intent = new Intent(VerActivity.this, mainAdulto2.class);
         startActivity(intent);
+        finish();
     }
 }

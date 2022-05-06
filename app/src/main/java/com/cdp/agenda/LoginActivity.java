@@ -99,13 +99,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
                             if (contrasenia.equals(contra)) {
-                                Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+
                                 if(rol.equals("adulto")) {
                                     guardarSesion("Adulto");
                                     Intent intent = new Intent(LoginActivity.this, mainAdulto2.class);
                                     intent.putExtra("usuarioLogin",usuario);
                                     intent.putExtra("contraseniaLogin",contra);
                                     startActivity(intent);
+                                    Toast.makeText(LoginActivity.this, "Bienvenido "+usuario, Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                                 if(rol.equals("responsable")){
@@ -114,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                                     intent.putExtra("usuarioLogin",usuario);
                                     intent.putExtra("contraseniaLogin",contra);
                                     startActivity(intent);
+                                    Toast.makeText(LoginActivity.this, "Bienvenido "+usuario, Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             }

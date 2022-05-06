@@ -72,15 +72,16 @@ public class MainActivity extends AppCompatActivity  {
 
         requestQueue= Volley.newRequestQueue(this);
         listAdultos=new ArrayList<String>();
-        //recibimos los valores
-        getUserR=getIntent().getExtras();
-        getContraR=getIntent().getExtras();
-        //guardamos los valores
-        nameGetR=getUserR.getString("usuarioLogin");
-        passwordGetR=getContraR.getString("contraseniaLogin");
-        //fin, ahora pueden usar las variables nameGetR,passwordGetR como requieran
+        if(getIntent().getExtras()!=null){
+            //recibimos los valores
+            getUserR=getIntent().getExtras();
+            getContraR=getIntent().getExtras();
+            //guardamos los valores
+            nameGetR=getUserR.getString("usuarioLogin");
+            passwordGetR=getContraR.getString("contraseniaLogin");
+            //fin, ahora pueden usar las variables nameGetA,passwordGetA como requieran
 
-        Toast.makeText(MainActivity.this, "Bienvenido "+nameGetR, Toast.LENGTH_LONG).show();
+        }
 
         //inicializar componentes
         spinner = findViewById(R.id.spinner);
