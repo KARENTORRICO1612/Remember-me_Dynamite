@@ -49,14 +49,14 @@
                 android:maxLength="30"
                 android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/aFecha"
-                android:layout_width="123dp"
+            <TextView
+                android:id="@+id/viFecha"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#005F73"
-                android:text="Fecha"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:text="Fecha:"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/eFecha"
@@ -66,14 +66,14 @@
                 android:textColor="#000000"
                 android:textSize="24sp" />
 
-            <Button
-                android:id="@+id/aHora"
-                android:layout_width="122dp"
+            <TextView
+                android:id="@+id/viHora"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#005F73"
-                android:text="Hora"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:text="Hora:" />
 
             <TextView
                 android:id="@+id/eHora"
