@@ -6,12 +6,26 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cdp.agenda.entidades.Contactos;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class vernotificacion extends AppCompatActivity {
 
-    ImageView idSalir;
+    EditText txtTitulo, txtDireccion, txtDescripcion;
+    //FloatingActionButton btn1;
+    FloatingActionButton fabEliminar;
+    TextView eFecha,eHora;
+
+
+    FloatingActionButton idSalir;
+
+    Contactos contacto; //incluir
+    int id ; //incluir id
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +33,35 @@ public class vernotificacion extends AppCompatActivity {
         setContentView(R.layout.activity_vernotificacion);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        //id = (Long.parseLong(this.getIntent().getStringExtra("id"))) ;
+        String título= this.getIntent().getStringExtra("título");
+        String fecha= this.getIntent().getStringExtra("fecha");
+        String hora= this.getIntent().getStringExtra("hora");
 
-        idSalir = (ImageView) findViewById(R.id.idSalir);
+        String dirección= this.getIntent().getStringExtra("dirección");
+        String descripción= this.getIntent().getStringExtra("descripción");
+
+        txtTitulo = findViewById(R.id.txtTitulo);
+        eHora = findViewById(R.id.eHora);
+        eFecha = findViewById(R.id.eFecha);
+        txtDireccion = findViewById(R.id.txtDireccion);
+        txtDescripcion = findViewById(R.id.txtDescripcion);
+
+
+        /*
+        para mostrar
+         */
+        txtTitulo.setText(título);
+        eFecha.setText(fecha);
+        eHora.setText(hora);
+        txtDireccion.setText(dirección);
+        txtDescripcion.setText(descripción);
+
+        fabEliminar = findViewById(R.id.fabEliminar);
+
+
+
+        idSalir = findViewById(R.id.idSalir);
         idSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

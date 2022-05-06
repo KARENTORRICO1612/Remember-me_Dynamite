@@ -113,7 +113,7 @@ public class EditarActivity extends AppCompatActivity {
 
                     today.set(GESTION, MES, DIA, HORA, MINUTO, 0);
 
-                    Utils.setAlarm(alarmID, today.getTimeInMillis(), EditarActivity.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString());
+                    Utils.setAlarm(alarmID, today.getTimeInMillis(), EditarActivity.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString(), eFecha.getText().toString(), eHora.getText().toString(),txtDireccion.getText().toString());
 
                     Toast.makeText(EditarActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
 

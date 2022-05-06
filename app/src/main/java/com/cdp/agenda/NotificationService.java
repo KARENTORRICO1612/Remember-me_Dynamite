@@ -53,7 +53,18 @@ public class NotificationService extends IntentService {
         String NOTIFICATION_CHANNEL_ID = getApplicationContext().getString(R.string.app_name);
         Context context = this.getApplicationContext();
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+
         Intent mIntent = new Intent(this, vernotificacion.class); //con este "intent" podemos dirigirnos a otra actividad
+
+        mIntent.putExtra("título", intent2.getStringExtra("título"));
+        mIntent.putExtra("fecha", intent2.getStringExtra("fecha"));
+        mIntent.putExtra("hora", intent2.getStringExtra("hora"));
+        mIntent.putExtra("dirección", intent2.getStringExtra("dirección"));
+        mIntent.putExtra("descripción", intent2.getStringExtra("descripción"));
+
+
+
         Resources res = this.getResources();
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM); //para el sonido de la alarma
 
@@ -90,8 +101,8 @@ public class NotificationService extends IntentService {
             mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             pendingIntent = PendingIntent.getActivity(context, 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT); //la pantalla de donde se realizo la configuracion de la notificacion
             //"pendingIntent" pendiente de que el usuario haga click en la notificación
-            tituloda = intent2.getStringExtra("titulo");
-            message = intent2.getStringExtra("mensaje");
+            tituloda = intent2.getStringExtra("título");
+            message = intent2.getStringExtra("descripción");
             String GROUP_NOTIFICATIONS = "Grupo de notificaciones";//-------intentando grupo de notificaciones
 
             /*//----------Boton de accion notificacion
@@ -145,8 +156,8 @@ public class NotificationService extends IntentService {
 
             //y esta para versiones que esten por debajo de Android O
         } else {
-            tituloda = intent2.getStringExtra("titulo");
-            message = intent2.getStringExtra("mensaje");
+            tituloda = intent2.getStringExtra("título");
+            message = intent2.getStringExtra("descripción");
 
             pendingIntent = PendingIntent.getActivity(context, 1, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             notification = new NotificationCompat.Builder(this)

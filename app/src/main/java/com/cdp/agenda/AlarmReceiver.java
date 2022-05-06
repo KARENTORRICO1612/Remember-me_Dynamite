@@ -19,9 +19,15 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent service1 = new Intent(context, NotificationService.class);
-        Toast.makeText(context, "fff:"+intent.getStringExtra("titulo"), Toast.LENGTH_LONG).show();
-        service1.putExtra("titulo", intent.getStringExtra("titulo"));
-        service1.putExtra("mensaje", intent.getStringExtra("mensaje"));
+        //Toast.makeText(context, "fff:"+intent.getStringExtra("titulo"), Toast.LENGTH_LONG).show();
+        service1.putExtra("título", intent.getStringExtra("título"));
+
+        service1.putExtra("fecha", intent.getStringExtra("fecha"));
+        service1.putExtra("hora", intent.getStringExtra("hora"));
+        service1.putExtra("dirección", intent.getStringExtra("dirección"));
+        service1.putExtra("descripción", intent.getStringExtra("descripción"));
+
+
         service1.setData((Uri.parse("custom://" + System.currentTimeMillis())));
         ContextCompat.startForegroundService(context, service1 );
         Log.d("WALKIRIA", " ALARM RECEIVED!!!");

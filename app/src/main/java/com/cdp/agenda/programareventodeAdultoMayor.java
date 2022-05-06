@@ -137,7 +137,7 @@ public class programareventodeAdultoMayor extends AppCompatActivity {
 
                     today.set(GESTION, MES, DIA, HORA, MINUTO, 0);
 
-                    Utils.setAlarm(alarmID, today.getTimeInMillis(), programareventodeAdultoMayor.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString());
+                    Utils.setAlarm(alarmID, today.getTimeInMillis(), programareventodeAdultoMayor.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString(), eFecha.getText().toString(), eHora.getText().toString(),txtDireccion.getText().toString());
 
                     Toast.makeText(programareventodeAdultoMayor.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
 

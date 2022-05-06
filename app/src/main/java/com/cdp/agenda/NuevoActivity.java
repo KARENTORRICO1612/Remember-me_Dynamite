@@ -100,7 +100,11 @@ public class NuevoActivity extends AppCompatActivity {
 
                     today.set(GESTION, MES, DIA, HORA, MINUTO, 0);
 
-                    Utils.setAlarm(alarmID, today.getTimeInMillis(), NuevoActivity.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString());
+
+
+                    Utils.setAlarm(alarmID, today.getTimeInMillis(), NuevoActivity.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString(), eFecha.getText().toString(), eHora.getText().toString(),txtDireccion.getText().toString());
+
+
 
                     Toast.makeText(NuevoActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
 
