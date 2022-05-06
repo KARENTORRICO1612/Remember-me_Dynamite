@@ -14,6 +14,11 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.cdp.agenda.adaptadores.ListaContactosAdapter;
 import com.cdp.agenda.db.DbContactos;
 import com.cdp.agenda.entidades.Contactos;
@@ -25,6 +30,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity  {
 
 
@@ -32,6 +41,8 @@ public class MainActivity extends AppCompatActivity  {
     private Button boton;
     private Button button;
     private Button idverLista;
+    private RequestQueue requestQueue;
+    private ArrayList<String> listAdultos;
 
     SearchView txtBuscar;
     //RecyclerView listaContactos;
@@ -50,7 +61,8 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.programar);
-
+        requestQueue= Volley.newRequestQueue(this);
+        listAdultos=new ArrayList<String>();
         //recibimos los valores
         getUserR=getIntent().getExtras();
         getContraR=getIntent().getExtras();
@@ -75,10 +87,11 @@ public class MainActivity extends AppCompatActivity  {
          });
 
 
-           boton.setOnClickListener(new View.OnClickListener() {
+           boton.setOnClickListener(new View.OnClickListener() {//boton actualuzar creo
             @Override
             public void onClick(View view) {
-                llenarSpinner();
+                String URL="https://bdconandroidstudio.000webhostapp.com/adultosACargoDeResp.php?r_nombre="+nameGetR;
+                buscarAdultos(URL);
             }
            });
 
@@ -94,15 +107,17 @@ public class MainActivity extends AppCompatActivity  {
             });
     }
 
-    private void llenarSpinner() {
-        ArrayList<Usuario> usuarios = new ArrayList<>();
-        usuarios.add(new Usuario(1,"jose","Garcia","lopez"));
-        usuarios.add(new Usuario(2,"luis","Pacheco","Hernandez"));
-        usuarios.add(new Usuario(3,"macario","Choque","Mento"));
-        usuarios.add(new Usuario(4,"maria","Alvarado","Veliz"));
 
-        ArrayAdapter<Usuario> adapter1 = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,usuarios);
+    private void llenarSpinner() {
+        //ArrayList<Usuario> usuarios = new ArrayList<>();
+        //usuarios.add(new Usuario(1,"jose","Garcia","lopez"));
+        //usuarios.add(new Usuario(2,"luis","Pacheco","Hernandez"));
+        //usuarios.add(new Usuario(3,"macario","Choque","Mento"));
+       // usuarios.add(new Usuario(4,"maria","Alvarado","Veliz"));
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,listAdultos);
         spinner.setAdapter(adapter1);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -145,6 +160,7 @@ public class MainActivity extends AppCompatActivity  {
         inflater.inflate(R.menu.menu_principal, menu);
         return true;
     }
+
     public boolean onOptionsItemSelected(MenuItem item){
         //evaluar para que nos traiga el id del elemento del menu selecionado
         switch (item.getItemId()){
@@ -161,32 +177,36 @@ public class MainActivity extends AppCompatActivity  {
         startActivity(intent);
     }
 
-    /*public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.menuNuevo:
-                nuevoRegistro();
-                return true;
+    private void buscarAdultos(String URL){
+        //Toast.makeText(getApplicationContext(), "se hizo la consulta1", Toast.LENGTH_SHORT).show();
+        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                JSONObject jsonObject = null;
+                for(int i=0;i< response.length();i++) {
+                    try {
+                        //jsonObject = response.getJSONObject(0);
+                        //txtTitulo.setText(response.getString(0));
+                        listAdultos.add(response.getString(i));
+                        Toast.makeText(getApplicationContext(),"ingreso consulta", Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
 
-            default:
-                return super.onOptionsItemSelected(item);
+                }
+                llenarSpinner();// se llena el spiner
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+            }
         }
-    }*/
-
-    /*private void nuevoRegistro(){
-        Intent intent = new Intent(this, NuevoActivity.class);
-        startActivity(intent);
+        );
+        requestQueue.add(jsonArrayRequest);
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String s) {
-        return false;
-    }
 
-    @Override
-    public boolean onQueryTextChange(String s) {
-        //adapter.filtrado(s);
-        return false;
-    }
-*/
 
 }
