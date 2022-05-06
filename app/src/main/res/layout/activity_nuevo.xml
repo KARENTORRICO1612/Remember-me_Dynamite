@@ -145,18 +145,18 @@
                 android:textSize="16sp"
                 tools:ignore="RtlCompat" />
 
-            <Button
-                android:id="@+id/btnBorrar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#005F73"
-                android:text="Borrar"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
         </LinearLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/btnBorrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#005F73"
+        android:text="Borrar"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
 
 
 </LinearLayout>
