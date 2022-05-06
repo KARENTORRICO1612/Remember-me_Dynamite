@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.PowerManager;
 
 import androidx.core.app.NotificationCompat;
 
@@ -50,6 +51,19 @@ public class NotificationService extends IntentService {
     @TargetApi(Build.VERSION_CODES.O)
     @Override
     protected void onHandleIntent(Intent intent2) {
+
+        PowerManager power = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
+        boolean isScreenOn = Build.VERSION.SDK_INT >= 20 ? power.isInteractive() : power.isScreenOn();
+
+        if (!isScreenOn) { //¿La pantalla esta apagada?
+            //La pantalla esta apagada!, se enciende.
+            PowerManager.WakeLock wl = power.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "myApp:notificationLock");
+            wl.acquire(3000);
+            wl.release();
+        }else{
+            //La pantalla esta encendida!
+        }
+
         String NOTIFICATION_CHANNEL_ID = getApplicationContext().getString(R.string.app_name);
         Context context = this.getApplicationContext();
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -66,7 +80,7 @@ public class NotificationService extends IntentService {
 
 
         Resources res = this.getResources();
-        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM); //para el sonido de la alarma
+        Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.relojconalarma); //para el sonido de la alarma
 
         String tituloda = "sin nada";
         String message = "sin nada";
@@ -121,7 +135,7 @@ public class NotificationService extends IntentService {
                     .setAutoCancel(true)
                     .setSound(soundUri)
                     .setContentIntent(pendingIntent)
-                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    //.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                     //.addAction(R.drawable.ic_stat_name,getString(R.string.Ver_Informacion), snoozePendingIntent)//+++++++)
                     .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
             Notification notification = builder.build(); //viene de "notificationManager.notify(idAlarm, mNotifyBuilder.build());"
@@ -167,7 +181,7 @@ public class NotificationService extends IntentService {
                     .setSound(soundUri)
                     .setAutoCancel(true)
                     .setContentTitle(tituloda).setCategory(Notification.CATEGORY_SERVICE)
-                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    //.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                     //.setContentTitle(getApplicationContext().getString(R.string.app_name)).setCategory(Notification.CATEGORY_SERVICE) //titulo notificacion
                     .setContentText(message).build();
             notificationManager.notify(NOTIFICATION_ID, notification);
