@@ -73,19 +73,28 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             String confiCon = iConfiContra.getText().toString().trim();
             String r = String.valueOf(spiRol.getSelectedItem());
             if(!nom.equals("") && !con.equals("") && !confiCon.equals("")){
-                if(con.equals(confiCon)){
-                    if(r.equals("Adulto")){
-                        registrarAdulto(nom, con);
-                    }
-                    if(r.equals("Responsable")){
-                        registrarResponsable(nom, con);
+                if(nom.length()>= 6 && con.length()>= 6){
+                    if(nom.length()<= 20 && con.length()<=20 ){
+                        if(con.equals(confiCon)){
+                            if(r.equals("Adulto")){
+                                registrarAdulto(nom, con);
+                            }
+                            if(r.equals("Responsable")){
+                                registrarResponsable(nom, con);
+                            }
+                        }else{
+                            Toast.makeText(RegistroActivity.this, "Las contraseñas no Coinciden", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(RegistroActivity.this, "Nombre de Usuario y Contraseña deben tener menos de 20 caracteres", Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    Toast.makeText(RegistroActivity.this, "Las contraseñas no Coinciden", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistroActivity.this, "Nombre de Usuario y Contraseña deben tener por lo menos 6 caracteres", Toast.LENGTH_SHORT).show();
                 }
             }else{
                 Toast.makeText(RegistroActivity.this, "Debe llenar todo los campos.", Toast.LENGTH_SHORT).show();
             }
+
 
 
 
