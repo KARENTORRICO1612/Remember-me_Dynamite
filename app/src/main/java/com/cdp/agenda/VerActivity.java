@@ -79,7 +79,7 @@ public class VerActivity extends AppCompatActivity {
                 Intent intent = new Intent(VerActivity.this, EditarActivity.class);
                 intent.putExtra("ID", id);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         });
 

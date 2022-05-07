@@ -55,6 +55,7 @@ public class NuevoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nuevo);
         requestQueue= Volley.newRequestQueue(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         settings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);//notificaciones
 
@@ -115,6 +116,7 @@ public class NuevoActivity extends AppCompatActivity {
                         limpiar();
                         Intent intent = new Intent(actividad, mainAdulto2.class);
                         startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(NuevoActivity.this, "ERROR AL GUARDAR REGISTRO", Toast.LENGTH_LONG).show();
                     }

@@ -54,8 +54,8 @@ public class EditarActivity extends AppCompatActivity {
 
         actividad=this;
 
-        aHora=findViewById(R.id.aHora);
-        aFecha=findViewById(R.id.aFecha);
+        aHora=(Button) findViewById(R.id.aHora);
+        aFecha=(Button) findViewById(R.id.aFecha);
         eHora= findViewById(R.id.eHora);
         eFecha= findViewById(R.id.eFecha);
         aHora.setOnClickListener(this::onClick);
@@ -121,10 +121,10 @@ public class EditarActivity extends AppCompatActivity {
 
                     if(correcto){
                         Toast.makeText(EditarActivity.this, "REGISTRO MODIFICADO", Toast.LENGTH_LONG).show();
-                        //verRegistro();
-                        Intent intent = new Intent(EditarActivity.this, mainAdulto2.class);
+                        verRegistro();
+                        Intent intent = new Intent(actividad, mainAdulto2.class);
                         startActivity(intent);
-                        finish();
+                        //finish();
                     } else {
                         Toast.makeText(EditarActivity.this, "ERROR AL MODIFICAR REGISTRO", Toast.LENGTH_LONG).show();
                     }

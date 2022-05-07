@@ -113,8 +113,9 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
     }
 
     private void nuevoRegistro(){
-        Intent intent = new Intent(this, NuevoActivity.class);
+        Intent intent = new Intent(mainAdulto2.this, NuevoActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
