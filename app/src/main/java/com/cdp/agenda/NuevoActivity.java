@@ -41,6 +41,7 @@ public class NuevoActivity extends AppCompatActivity {
     Activity actividad;
 
     private String titulo,time,fecha,direccion,descripcion;
+    private String nomAdulto;
     RequestQueue requestQueue;
 
     private int dia, mes, anio, hora, minutos;
@@ -54,6 +55,7 @@ public class NuevoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo);
         requestQueue= Volley.newRequestQueue(this);
+        nomAdulto=getIntent().getStringExtra("nombreAdulto");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -115,8 +117,9 @@ public class NuevoActivity extends AppCompatActivity {
                         //Toast.makeText(NuevoActivity.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
                         limpiar();
                         Intent intent = new Intent(actividad, mainAdulto2.class);
+                        intent.putExtra("usuarioLogin",nomAdulto);
                         startActivity(intent);
-                        finish();
+                        //finish();
                     } else {
                         Toast.makeText(NuevoActivity.this, "ERROR AL GUARDAR REGISTRO", Toast.LENGTH_LONG).show();
                     }
@@ -240,6 +243,8 @@ public class NuevoActivity extends AppCompatActivity {
                 parametros.put("fecha",fecha);
                 parametros.put("descripcion",descripcion);
                 parametros.put("direccion",direccion);
+                parametros.put("adulto_r",nomAdulto);
+
 
                 return parametros;
             }
