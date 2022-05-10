@@ -124,8 +124,8 @@ public class EditarActivity extends AppCompatActivity {
                     if(correcto){
                         Toast.makeText(EditarActivity.this, "REGISTRO MODIFICADO", Toast.LENGTH_LONG).show();
                         verRegistro();
-                       // Intent intent = new Intent(actividad, mainAdulto2.class);
-                        Intent intent = new Intent(actividad, VerActivity.class);
+                        Intent intent = new Intent(actividad, mainAdulto2.class);
+                        //Intent intent = new Intent(actividad, VerActivity.class);
                         startActivity(intent);
                         //finish();
                     } else {
