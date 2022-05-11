@@ -31,7 +31,7 @@ public class EditarActivity extends AppCompatActivity {
 
     Activity actividad;
 
-    Button btnGuarda,aHora,aFecha;
+    Button btnGuarda,bHora,bFecha;
     FloatingActionButton fabEditar, fabEliminar;
     boolean correcto = false;
     Contactos contacto;
@@ -53,13 +53,12 @@ public class EditarActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         actividad=this;
-
-        aHora=(Button) findViewById(R.id.aHora);
-        aFecha=(Button) findViewById(R.id.aFecha);
+       bHora= (Button) findViewById(R.id.bHora);
+       bFecha= (Button) findViewById(R.id.bFecha);
         eHora= findViewById(R.id.eHora);
         eFecha= findViewById(R.id.eFecha);
-        aHora.setOnClickListener(this::onClick);
-        aFecha.setOnClickListener(this::onClick);
+        bHora.setOnClickListener(this::onClick);
+        bFecha.setOnClickListener(this::onClick);
 
 
         txtTitulo = findViewById(R.id.txtTitulo);
@@ -144,7 +143,7 @@ public class EditarActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void onClick(View v) {
-        if (v == aFecha) {
+        if (v == bFecha) {
             final Calendar now = Calendar.getInstance();
             int actualDay = now.get(Calendar.DAY_OF_MONTH);
             int actualMonth = now.get(Calendar.MONTH)+1;
@@ -188,7 +187,7 @@ public class EditarActivity extends AppCompatActivity {
             datePickerDialog.show();
 
         }
-        if (v == aHora) {
+        if (v == bHora) {
             final Calendar c = Calendar.getInstance();
             int hora = c.get(Calendar.HOUR_OF_DAY);
             int minutos = c.get(Calendar.MINUTE);

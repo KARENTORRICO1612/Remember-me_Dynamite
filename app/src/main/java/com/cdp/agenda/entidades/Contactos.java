@@ -10,6 +10,7 @@ public class Contactos {
     private String fecha;
     private String direccion;
     private String descripcion;
+    private String adulto_r;
 
     public int getId() {
 
@@ -50,9 +51,11 @@ public class Contactos {
     }
 
     public String getDireccion(){
+
         return direccion;
     }
     public void setDireccion(String direccion) {
+
         this.direccion = direccion;
     }
 
@@ -62,8 +65,15 @@ public class Contactos {
     }
 
     public void setDescripcion(String descripcion) {
+
         this.descripcion = descripcion;
     }
 
+    public String getAdulto_r() {
+        return adulto_r;
+    }
 
+    public void setAdulto_r(String adulto_r) {
+        this.adulto_r = adulto_r;
+    }
 }

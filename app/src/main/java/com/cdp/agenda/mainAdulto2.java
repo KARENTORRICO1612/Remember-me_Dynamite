@@ -106,6 +106,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
                         contacto.setFecha(jsonObject.getString("fecha"));
                         contacto.setDireccion(jsonObject.getString("direccion"));
                         contacto.setDescripcion(jsonObject.getString("descripcion"));
+                        contacto.setAdulto_r(jsonObject.getString("adulto_r"));
                         lista.add(contacto);
                     } catch (JSONException e) {
                         e.printStackTrace();

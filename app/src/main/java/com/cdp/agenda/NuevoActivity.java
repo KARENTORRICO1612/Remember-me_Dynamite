@@ -244,8 +244,6 @@ public class NuevoActivity extends AppCompatActivity {
                 parametros.put("descripcion",descripcion);
                 parametros.put("direccion",direccion);
                 parametros.put("adulto_r",nomAdulto);
-
-
                 return parametros;
             }
         };
