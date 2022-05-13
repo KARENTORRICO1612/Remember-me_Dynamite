@@ -31,7 +31,11 @@ public class EditarActivity extends AppCompatActivity {
 
     Activity actividad;
 
-    Button btnGuarda,bHora,bFecha;
+
+    Button btnGuarda;
+    TextView aHora;
+    TextView aFecha;
+//>>>>>>> FinalSprint2_MerN
     FloatingActionButton fabEditar, fabEliminar;
     boolean correcto = false;
     Contactos contacto;
@@ -44,7 +48,7 @@ public class EditarActivity extends AppCompatActivity {
 
     Bundle extras;
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint({"RestrictedApi", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +57,11 @@ public class EditarActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         actividad=this;
-       bHora= (Button) findViewById(R.id.bHora);
-       bFecha= (Button) findViewById(R.id.bFecha);
+
+
+        aHora = (TextView) findViewById(R.id.aHora);
+        aFecha = (TextView) findViewById(R.id.aFecha);
+// >>>>>>> FinalSprint2_MerN
         eHora= findViewById(R.id.eHora);
         eFecha= findViewById(R.id.eFecha);
         bHora.setOnClickListener(this::onClick);
@@ -122,6 +129,7 @@ public class EditarActivity extends AppCompatActivity {
                         Toast.makeText(EditarActivity.this, "REGISTRO MODIFICADO", Toast.LENGTH_LONG).show();
                         verRegistro();
                         Intent intent = new Intent(actividad, mainAdulto2.class);
+                        //Intent intent = new Intent(actividad, VerActivity.class);
                         startActivity(intent);
                         //finish();
                     } else {
