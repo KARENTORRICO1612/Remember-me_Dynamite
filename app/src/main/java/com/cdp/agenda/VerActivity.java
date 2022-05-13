@@ -75,8 +75,8 @@ public class VerActivity extends AppCompatActivity {
         }
 
 
-        final DbContactos dbContactos = new DbContactos(VerActivity.this);
-        contacto = dbContactos.verContacto(id);
+       // final DbContactos dbContactos = new DbContactos(VerActivity.this);
+       // contacto = dbContactos.verContacto(id);
         obtenerDatosEvento("https://bdconandroidstudio.000webhostapp.com/informacionEvento.php?id="+id);
         /*
         if(contacto != null){
@@ -99,9 +99,15 @@ public class VerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(VerActivity.this, EditarActivity.class);
-                intent.putExtra("ID", id);
+                intent.putExtra("ID", id+"");
+                intent.putExtra("titulo",titulo);
+                intent.putExtra("hora",hora);
+                intent.putExtra("fecha",fecha);
+                intent.putExtra("direccion",direccion);
+                intent.putExtra("descripcion",descripcion);
+                intent.putExtra("usuarioLogin",nomAdulto);
                 startActivity(intent);
-               // finish();
+               finish();
             }
         });
 
@@ -115,7 +121,7 @@ public class VerActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                             eliminarEvento();
                               //  if(dbContactos.eliminarContacto(id)){
-                                   lista();
+
                                // }
 
                             }
@@ -133,8 +139,9 @@ public class VerActivity extends AppCompatActivity {
     private void lista(){
         Intent intent = new Intent(VerActivity.this, mainAdulto2.class);
         intent.putExtra("usuarioLogin",nomAdulto);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
+       // finish();
     }
     private void obtenerDatosEvento(String URL){
         // Toast.makeText(getApplicationContext(), "se hizo la consulta", Toast.LENGTH_SHORT).show();
@@ -180,6 +187,7 @@ public class VerActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Evento Eliminado", Toast.LENGTH_SHORT).show();
+                lista();
             }
         }, new Response.ErrorListener() {
             @Override

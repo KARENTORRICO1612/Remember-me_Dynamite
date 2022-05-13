@@ -87,7 +87,7 @@ public class NuevoActivity extends AppCompatActivity {
 
                 if (!txtTitulo.getText().toString().equals("")
                         && !eFecha.getText().toString().equals("")&& !eHora.getText().toString().equals("")) {
-                    registrarActivity("https://bdconandroidstudio.000webhostapp.com/registrar.php");
+                    registrarActivity(titulo,time,fecha,direccion,descripcion,nomAdulto);
                     String[] parts = txtTitulo.getText().toString().split("");
                     String primero  =parts[0];
                     if (primero.equals(" ")){
@@ -111,18 +111,13 @@ public class NuevoActivity extends AppCompatActivity {
 
                     //Toast.makeText(NuevoActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
 
-                    long id = dbContactos.insertarContacto(titulo,time,fecha,direccion,descripcion);
+                    //long id = dbContactos.insertarContacto(titulo,time,fecha,direccion,descripcion);
 
-                    if (id > 0) {
+                    //if (id > 0) {
                         //Toast.makeText(NuevoActivity.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
-                        limpiar();
-                        Intent intent = new Intent(actividad, mainAdulto2.class);
-                        intent.putExtra("usuarioLogin",nomAdulto);
-                        startActivity(intent);
-                        //finish();
-                    } else {
-                        Toast.makeText(NuevoActivity.this, "ERROR AL GUARDAR REGISTRO", Toast.LENGTH_LONG).show();
-                    }
+                    //} else {
+                       // Toast.makeText(NuevoActivity.this, "ERROR AL GUARDAR REGISTRO", Toast.LENGTH_LONG).show();
+                    //}
                 } else {
                     eHora.setError("");
                     eFecha.setError("");
@@ -222,11 +217,17 @@ public class NuevoActivity extends AppCompatActivity {
     }
 
 
-    public void registrarActivity(String URL){
+    public void registrarActivity(String t,String h,String f, String d, String des,String adul){
+        String URL="https://bdconandroidstudio.000webhostapp.com/registrar.php";
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show();
+                limpiar();
+                Intent intent = new Intent(actividad, mainAdulto2.class);
+                intent.putExtra("usuarioLogin",nomAdulto);
+                startActivity(intent);
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -238,12 +239,12 @@ public class NuevoActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> parametros=new HashMap<String,String>();
-                parametros.put("titulo",titulo);
-                parametros.put("hora",time);
-                parametros.put("fecha",fecha);
-                parametros.put("descripcion",descripcion);
-                parametros.put("direccion",direccion);
-                parametros.put("adulto_r",nomAdulto);
+                parametros.put("titulo",t);
+                parametros.put("hora",h);
+                parametros.put("fecha",f);
+                parametros.put("descripcion",des);
+                parametros.put("direccion",d);
+                parametros.put("adulto_r",adul);
                 return parametros;
             }
         };

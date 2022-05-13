@@ -16,31 +16,41 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.cdp.agenda.db.DbContactos;
 import com.cdp.agenda.entidades.Contactos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditarActivity extends AppCompatActivity {
 
     EditText txtTitulo, txtDireccion, txtDescripcion;
     TextView eHora,eFecha;
-
     Activity actividad;
-
-
     Button btnGuarda;
     TextView aHora;
     TextView aFecha;
-//>>>>>>> FinalSprint2_MerN
+    RequestQueue requestQueue;
     FloatingActionButton fabEditar, fabEliminar;
     boolean correcto = false;
+    String titulo,hora,fecha,direccion,descripcion;
+    String nomAdulto;
+    String ID;
     Contactos contacto;
     int id = 0;
-    private int dia, mes, anio, hora, minutos;
+    private int dia, mes, anio, minutos;
 
     private int alarmID = 2;
 
@@ -55,17 +65,23 @@ public class EditarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ver);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+        ID=getIntent().getStringExtra("ID");
+        titulo= getIntent().getStringExtra("titulo");
+        hora=   getIntent().getStringExtra("hora");
+        fecha= getIntent().getStringExtra("fecha");
+        direccion=getIntent().getStringExtra("direccion");
+        descripcion=getIntent().getStringExtra("descripcion");
+        nomAdulto=getIntent().getStringExtra("usuarioLogin");
+        requestQueue = Volley.newRequestQueue(this);
         actividad=this;
 
 
         aHora = (TextView) findViewById(R.id.aHora);
         aFecha = (TextView) findViewById(R.id.aFecha);
-// >>>>>>> FinalSprint2_MerN
         eHora= findViewById(R.id.eHora);
         eFecha= findViewById(R.id.eFecha);
-        bHora.setOnClickListener(this::onClick);
-        bFecha.setOnClickListener(this::onClick);
+        aHora.setOnClickListener(this::onClick);
+        aFecha.setOnClickListener(this::onClick);
 
 
         txtTitulo = findViewById(R.id.txtTitulo);
@@ -77,7 +93,7 @@ public class EditarActivity extends AppCompatActivity {
         fabEliminar = findViewById(R.id.fabEliminar);
         fabEliminar.setVisibility(View.INVISIBLE);
 
-        if (savedInstanceState == null) {
+       /* if (savedInstanceState == null) {
             extras = getIntent().getExtras();
             if (extras == null) {
                 id = Integer.parseInt(null);
@@ -88,18 +104,20 @@ public class EditarActivity extends AppCompatActivity {
             id = (int) savedInstanceState.getSerializable("ID");
         }
 
-        final DbContactos dbContactos = new DbContactos(EditarActivity.this);
-        contacto = dbContactos.verContacto(id);
+        */
 
-        if (contacto != null) {
-            txtTitulo.setText(contacto.getTitulo());
-            eHora.setText(contacto.getHora());
-            eFecha.setText(contacto.getFecha());
-            txtDireccion.setText(contacto.getDireccion());
-            txtDescripcion.setText(contacto.getDescripcion());
+      //  final DbContactos dbContactos = new DbContactos(EditarActivity.this);
+      //  contacto = dbContactos.verContacto(id);
+
+        //if (contacto != null) {
+            txtTitulo.setText(titulo);
+            eHora.setText(hora);
+            eFecha.setText(fecha);
+            txtDireccion.setText(direccion);
+            txtDescripcion.setText(descripcion);
             eHora.setInputType(InputType.TYPE_NULL);
             eFecha.setInputType(InputType.TYPE_NULL);
-        }
+        //}
 
         btnGuarda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,15 +125,22 @@ public class EditarActivity extends AppCompatActivity {
                 if (!txtTitulo.getText().toString().equals("") && !eHora.getText().toString().equals("") &&
                         !eFecha.getText().toString().equals("")) {
 
+                    titulo=txtTitulo.getText().toString().trim();
+                    fecha=eFecha.getText().toString().trim();
+                    hora=eHora.getText().toString().trim();
+                    descripcion=txtDescripcion.getText().toString().trim();
+                    direccion=txtDireccion.getText().toString().trim();
+                    modificarActivity();
+
                     String[] parts = txtTitulo.getText().toString().split("");
                     String primero  =parts[0];
                     if (primero.equals(" ")){
                         Toast.makeText(EditarActivity.this, "Llenar campo de Tìtulo", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    correcto = dbContactos.editarContacto(id, txtTitulo.getText().toString(), eHora.getText().toString(), eFecha.getText().toString(),
-                            txtDireccion.getText().toString(), txtDescripcion.getText().toString()
-                            );
+                   // correcto = dbContactos.editarContacto(id, txtTitulo.getText().toString(), eHora.getText().toString(), eFecha.getText().toString(),
+                     //       txtDireccion.getText().toString(), txtDescripcion.getText().toString()
+                       //     );
 
                     Calendar today = Calendar.getInstance();
 
@@ -133,7 +158,7 @@ public class EditarActivity extends AppCompatActivity {
                         startActivity(intent);
                         //finish();
                     } else {
-                        Toast.makeText(EditarActivity.this, "ERROR AL MODIFICAR REGISTRO", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(EditarActivity.this, "ERROR AL MODIFICAR REGISTRO", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     eHora.setError("");
@@ -151,7 +176,7 @@ public class EditarActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void onClick(View v) {
-        if (v == bFecha) {
+        if (v == aFecha) {
             final Calendar now = Calendar.getInstance();
             int actualDay = now.get(Calendar.DAY_OF_MONTH);
             int actualMonth = now.get(Calendar.MONTH)+1;
@@ -195,7 +220,7 @@ public class EditarActivity extends AppCompatActivity {
             datePickerDialog.show();
 
         }
-        if (v == bHora) {
+        if (v == aHora) {
             final Calendar c = Calendar.getInstance();
             int hora = c.get(Calendar.HOUR_OF_DAY);
             int minutos = c.get(Calendar.MINUTE);
@@ -213,4 +238,42 @@ public class EditarActivity extends AppCompatActivity {
         }
     }
 
+
+    public void modificarActivity(){
+        String URL="https://bdconandroidstudio.000webhostapp.com/modificarEvento.php";
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), "MODIFICACION EXITOSA", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(actividad, mainAdulto2.class);
+                intent.putExtra("usuarioLogin",nomAdulto);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                //finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros=new HashMap<String,String>();
+                parametros.put("id",ID);
+                parametros.put("titulo",titulo);
+                parametros.put("hora",hora);
+                parametros.put("fecha",fecha);
+                parametros.put("descripcion",descripcion);
+                parametros.put("direccion",direccion);
+                return parametros;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+
 }
+
