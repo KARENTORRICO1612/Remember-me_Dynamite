@@ -113,13 +113,13 @@ public class EditarActivity extends AppCompatActivity {
                             txtDireccion.getText().toString(), txtDescripcion.getText().toString()
                             );
 
-                    Calendar today = Calendar.getInstance();
+                    /*Calendar today = Calendar.getInstance();
 
                     today.set(GESTION, MES, DIA, HORA, MINUTO, 0);
 
                     Utils.setAlarm(alarmID, today.getTimeInMillis(), EditarActivity.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString(), eFecha.getText().toString(), eHora.getText().toString(),txtDireccion.getText().toString());
 
-                   // Toast.makeText(EditarActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
+                   // Toast.makeText(EditarActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();*/
 
                     if(correcto){
                         Toast.makeText(EditarActivity.this, "REGISTRO MODIFICADO", Toast.LENGTH_LONG).show();
