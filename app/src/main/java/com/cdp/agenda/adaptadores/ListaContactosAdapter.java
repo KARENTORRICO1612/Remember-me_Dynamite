@@ -68,6 +68,7 @@ public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAd
 
     @Override
     public int getItemCount() {
+
         return listaContactos.size();
     }
 
@@ -85,9 +86,10 @@ public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAd
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Context context = view.getContext();
+                    Context context = view.getContext(); //recuperan el id del evento seleccionado
                     Intent intent = new Intent(context, VerActivity.class);
                     intent.putExtra("ID", listaContactos.get(getAdapterPosition()).getId());
+                    intent.putExtra("nombreAdulto",listaContactos.get(getAdapterPosition()).getAdulto_r());
                     context.startActivity(intent);
                 }
             });

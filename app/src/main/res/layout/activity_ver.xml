@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFE8D6"
     android:orientation="vertical"
     tools:context=".VerActivity">
 
@@ -26,7 +28,6 @@
             android:orientation="vertical">
 
 
-
             <TextView
                 android:id="@+id/viewTitulo"
                 android:layout_width="match_parent"
@@ -40,39 +41,54 @@
                 android:id="@+id/txtTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
                 android:ems="10"
-                android:maxLength="30"
                 android:inputType="text"
                 android:labelFor="@+id/viewTitulo"
+                android:maxLength="30"
                 android:textSize="20sp" />
 
-            <Button
+            <TextView
                 android:id="@+id/aFecha"
-                android:layout_width="123dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#822DE3"
-                android:text="Fecha"
-                android:textColor="#FFFFFF" />
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@android:color/white"
+                android:backgroundTint="#005F73"
+                android:minWidth="88dip"
+                android:minHeight="44dip"
+                android:rotationY="2"
+                android:text="FECHA"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                tools:text="    Fecha" />
 
             <TextView
                 android:id="@+id/eFecha"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
+                android:background="#FFFFFF"
                 android:textColor="#000000"
                 android:textSize="24sp" />
 
-            <Button
+            <TextView
                 android:id="@+id/aHora"
-                android:layout_width="122dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#822DE3"
-                android:text="Hora"
-                android:textColor="#FFFFFF" />
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@android:color/white"
+                android:backgroundTint="#005F73"
+                android:minWidth="88dip"
+                android:minHeight="44dip"
+                android:rotationY="2"
+                android:text="HORA"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                tools:text="    Hora" />
 
             <TextView
                 android:id="@+id/eHora"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
+                android:background="#FFFFFF"
                 android:textColor="#000000"
                 android:textSize="24sp" />
 
@@ -89,10 +105,11 @@
                 android:id="@+id/txtDireccion"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
+                android:background="#FFFFFF"
                 android:ems="10"
-                android:maxLength="50"
                 android:inputType="text"
                 android:labelFor="@+id/viewDireccion"
+                android:maxLength="50"
                 android:textSize="20sp" />
 
             <TextView
@@ -108,10 +125,11 @@
                 android:id="@+id/txtDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
+                android:background="#FFFFFF"
                 android:ems="10"
-                android:maxLength="70"
                 android:inputType="text"
                 android:labelFor="@+id/viewDescripcion"
+                android:maxLength="70"
                 android:textSize="20sp" />
 
             <Button
@@ -119,10 +137,11 @@
                 android:layout_width="121dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="#822DE3"
+                android:backgroundTint="#005F73"
                 android:text="@string/btn_guarda"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#2E0F77" />
+                android:textColorHint="#2E0F77"
+                android:textSize="16sp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabEditar"
@@ -130,7 +149,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:clickable="true"
-                android:src="@drawable/ic_edit" />
+                android:src="@drawable/ic_edit"
+                app:backgroundTint="#005F73" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabEliminar"
@@ -138,7 +158,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:clickable="true"
-                android:src="@drawable/ic_delete" />
+                android:src="@drawable/ic_delete"
+                app:backgroundTint="#005F73" />
 
         </LinearLayout>
 

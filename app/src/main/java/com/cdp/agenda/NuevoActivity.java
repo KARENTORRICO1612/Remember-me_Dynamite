@@ -1,12 +1,17 @@
 package com.cdp.agenda;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Activity;
+import android.app.AlarmManager; //notificaciones
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,9 +19,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,18 +37,29 @@ public class NuevoActivity extends AppCompatActivity {
 
     EditText txtTitulo, txtDireccion, txtDescripcion;
     TextView eHora,eFecha;
-    Button btnGuarda, bFecha, bHora;
+    Button btnGuarda, btnBorrar, bFecha, bHora;
     Activity actividad;
+
+    private String titulo,time,fecha,direccion,descripcion;
+    private String nomAdulto;
+    RequestQueue requestQueue;
+
     private int dia, mes, anio, hora, minutos;
-    String titulo,time,fecha,descripcion,direccion;
+    private int alarmID = 1; //para notificaciones
+    private SharedPreferences settings; //notificaciones
+
+    private int HORA, MINUTO, DIA, MES, GESTION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo);
-
-        // HOLA JOSEEEEEEEEE
+        requestQueue= Volley.newRequestQueue(this);
+        nomAdulto=getIntent().getStringExtra("nombreAdulto");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        settings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);//notificaciones
 
         bFecha = (Button) findViewById(R.id.bFecha);
         bHora = (Button) findViewById(R.id.bHora);
@@ -59,41 +72,64 @@ public class NuevoActivity extends AppCompatActivity {
         txtDireccion = findViewById(R.id.txtDireccion);
         txtDescripcion = findViewById(R.id.txtDescripcion);
         btnGuarda = findViewById(R.id.btnGuarda);
+        btnBorrar = findViewById(R.id.btnBorrar);
         actividad=this;
-
-
-
         btnGuarda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                titulo= txtTitulo.getText().toString();
-                time = eHora.getText().toString();
-                fecha= eFecha.getText().toString();
-                direccion= txtDireccion.getText().toString().trim();
-                descripcion= txtDescripcion.getText().toString().trim();
+                titulo=txtTitulo.getText().toString().trim();
+                fecha=eFecha.getText().toString().trim();
+                time=eHora.getText().toString().trim();
+                descripcion=txtDescripcion.getText().toString().trim();
+                direccion=txtDireccion.getText().toString().trim();
+
+
 
                 if (!txtTitulo.getText().toString().equals("")
                         && !eFecha.getText().toString().equals("")&& !eHora.getText().toString().equals("")) {
-                    ejecutarServicio("https://bdconandroidstudio.000webhostapp.com/registrar.php");//llamamos a ka BD remota
-                    DbContactos dbContactos = new DbContactos(NuevoActivity.this);
-                    long id = dbContactos.insertarContacto(txtTitulo.getText().toString(), eHora.getText().toString(),eFecha.getText().toString(),direccion,descripcion);
-
-                    if (id > 0) {
-
-                        Toast.makeText(NuevoActivity.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
-                        limpiar();
-                        Intent intent = new Intent(actividad, MainActivity.class);
-                        startActivity(intent);
-
-                    } else {
-                        Toast.makeText(NuevoActivity.this, "ERROR AL GUARDAR REGISTRO", Toast.LENGTH_LONG).show();
+                    registrarActivity(titulo,time,fecha,direccion,descripcion,nomAdulto);
+                    String[] parts = txtTitulo.getText().toString().split("");
+                    String primero  =parts[0];
+                    if (primero.equals(" ")){
+                        Toast.makeText(NuevoActivity.this, "Llenar campo de Tìtulo", Toast.LENGTH_LONG).show();
+                        return;
                     }
+
+                    DbContactos dbContactos = new DbContactos(NuevoActivity.this);
+
+                    //crearAlarma
+
+                    Calendar today = Calendar.getInstance();
+
+                    today.set(GESTION, MES, DIA, HORA, MINUTO, 0);
+
+
+
+                    Utils.setAlarm(alarmID, today.getTimeInMillis(), NuevoActivity.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString(), eFecha.getText().toString(), eHora.getText().toString(),txtDireccion.getText().toString());
+
+
+
+                    //Toast.makeText(NuevoActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
+
+                    //long id = dbContactos.insertarContacto(titulo,time,fecha,direccion,descripcion);
+
+                    //if (id > 0) {
+                        //Toast.makeText(NuevoActivity.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
+                    //} else {
+                       // Toast.makeText(NuevoActivity.this, "ERROR AL GUARDAR REGISTRO", Toast.LENGTH_LONG).show();
+                    //}
                 } else {
                     eHora.setError("");
                     eFecha.setError("");
                     txtTitulo.setError("");
                     Toast.makeText(NuevoActivity.this, "Error complete los datos obligatorios", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        btnBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                limpiar();
             }
         });
     }
@@ -110,10 +146,15 @@ public class NuevoActivity extends AppCompatActivity {
   //  @Override
     public void onClick(View v) {
         if (v == bFecha) {
+            final Calendar now = Calendar.getInstance();
+            int actualDay = now.get(Calendar.DAY_OF_MONTH);
+            int actualMonth = now.get(Calendar.MONTH)+1;
+            int actualYear = now.get(Calendar.YEAR);
+
             final Calendar c = Calendar.getInstance();
-            dia = c.get(Calendar.DAY_OF_MONTH);
-            mes = c.get(Calendar.MONTH);
-            anio = c.get(Calendar.YEAR);
+            int dia = c.get(Calendar.DAY_OF_MONTH);
+            int mes = c.get(Calendar.MONTH);
+            int anio = c.get(Calendar.YEAR);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
@@ -122,41 +163,71 @@ public class NuevoActivity extends AppCompatActivity {
                     String dia= dayOfMonth+"";
                     if((monthOfYear+1)<10){
                         mes = "0"+(monthOfYear+1);
-
                     }
                     if(dayOfMonth<10){
                         dia = "0"+(dayOfMonth);
-
                     }
-
-
-
-                    eFecha.setText(year + "-" + mes + "-" + dia);
-
+                    if(year > actualYear){
+                        eFecha.setText(year+ "-" + mes + "-" + dia);
+                    }else if(year < actualYear){
+                        Toast.makeText(NuevoActivity.this, "NO SE PUEDEN REGISTRAR FECHAS ANTERIORES", Toast.LENGTH_LONG).show();
+                    }else if(year == actualYear){
+                        if((monthOfYear+1)>actualMonth){
+                            eFecha.setText(year+ "-" + mes + "-" + dia);
+                        }else if((monthOfYear+1)<actualMonth){
+                            Toast.makeText(NuevoActivity.this, "NO SE PUEDEN REGISTRAR FECHAS ANTERIORES", Toast.LENGTH_LONG).show();
+                        }else if((monthOfYear+1)==actualMonth){
+                            if(dayOfMonth>=actualDay){
+                                eFecha.setText(year+ "-" + mes + "-" + dia);
+                            }else Toast.makeText(NuevoActivity.this, "NO SE PUEDEN REGISTRAR FECHAS ANTERIORES", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    GESTION = year;
+                    MES = monthOfYear;
+                    DIA = dayOfMonth;
                 }
             }, 2022, mes, dia);
+
             datePickerDialog.show();
+
         }
         if (v == bHora) {
             final Calendar c = Calendar.getInstance();
-            hora = c.get(Calendar.HOUR_OF_DAY);
-            minutos = c.get(Calendar.MINUTE);
+            int hora = c.get(Calendar.HOUR_OF_DAY);
+            int minutos = c.get(Calendar.MINUTE);
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    String finalHour, finalMinute; //notificaciones
+
                     eHora.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                    finalHour = "" + hourOfDay;//notificaciones
+                    finalMinute = "" + minute; //notificaciones
+                    if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
+                    if(minute < 10) finalMinute = "0" + minute; //notificaciones
+
+                    HORA = hourOfDay;
+                    MINUTO = minute;
                 }
             }, hora, minutos, false);
             timePickerDialog.show();
         }
     }
 
-    public void ejecutarServicio(String URL){
+
+    public void registrarActivity(String t,String h,String f, String d, String des,String adul){
+        String URL="https://bdconandroidstudio.000webhostapp.com/registrar.php";
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show();
+                limpiar();
+                Intent intent = new Intent(actividad, mainAdulto2.class);
+                intent.putExtra("usuarioLogin",nomAdulto);
+                startActivity(intent);
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -167,22 +238,19 @@ public class NuevoActivity extends AppCompatActivity {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
                 Map<String,String> parametros=new HashMap<String,String>();
-
-                parametros.put("titulo",titulo);
-                parametros.put("hora",time);
-                parametros.put("fecha",fecha);
-                parametros.put("direccion",direccion);
-                parametros.put("descripcion",descripcion);
-
+                parametros.put("titulo",t);
+                parametros.put("hora",h);
+                parametros.put("fecha",f);
+                parametros.put("descripcion",des);
+                parametros.put("direccion",d);
+                parametros.put("adulto_r",adul);
                 return parametros;
             }
         };
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
+
         requestQueue.add(stringRequest);
 
     }
-
 
 }
