@@ -31,7 +31,9 @@ public class EditarActivity extends AppCompatActivity {
 
     Activity actividad;
 
-    Button btnGuarda,aHora,aFecha;
+    Button btnGuarda;
+    TextView aHora;
+    TextView aFecha;
     FloatingActionButton fabEditar, fabEliminar;
     boolean correcto = false;
     Contactos contacto;
@@ -44,7 +46,7 @@ public class EditarActivity extends AppCompatActivity {
 
     Bundle extras;
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint({"RestrictedApi", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +56,8 @@ public class EditarActivity extends AppCompatActivity {
 
         actividad=this;
 
-        aHora=(Button) findViewById(R.id.aHora);
-        aFecha=(Button) findViewById(R.id.aFecha);
+        aHora = (TextView) findViewById(R.id.aHora);
+        aFecha = (TextView) findViewById(R.id.aFecha);
         eHora= findViewById(R.id.eHora);
         eFecha= findViewById(R.id.eFecha);
         aHora.setOnClickListener(this::onClick);
@@ -123,6 +125,7 @@ public class EditarActivity extends AppCompatActivity {
                         Toast.makeText(EditarActivity.this, "REGISTRO MODIFICADO", Toast.LENGTH_LONG).show();
                         verRegistro();
                         Intent intent = new Intent(actividad, mainAdulto2.class);
+                        //Intent intent = new Intent(actividad, VerActivity.class);
                         startActivity(intent);
                         //finish();
                     } else {
