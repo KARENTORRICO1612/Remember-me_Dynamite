@@ -3,15 +3,59 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Edson/Repositorio/Remember-me_Dynamite/app/src/main/res/layout/activity_login.xml" value="0.34193840579710144" />
+        <entry key="..\:/Edson/Repositorio/Remember-me_Dynamite/app/src/main/res/layout/activity_registro.xml" value="0.34193840579710144" />
+        <entry key="..\:/IngSW/Remember-me_Dynamite/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/IngSW/Remember-me_Dynamite/app/src/main/res/layout/activity_nuevo.xml" value="0.21" />
+        <entry key="..\:/IngSW/Remember-me_Dynamite/app/src/main/res/layout/activity_registro.xml" value="0.25" />
+        <entry key="..\:/IngSW/Remember-me_Dynamite/app/src/main/res/layout/activity_ver.xml" value="0.22" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2555" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2555" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/activity_main_adulto2.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/activity_nuevo.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/activity_pantalla.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/activity_programareventode_adulto_mayor.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/activity_registro.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/activity_ver.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/activity_vernotificacion.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/lista_item_contacto.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/layout/programar.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/menu/menu_principal.xml" value="0.25" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2555" />
+        <entry key="..\:/Users/59167/Desktop/practGit/Remember-me_Dynamite/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2555" />
         <entry key="..\:/Users/ASUS/Desktop/Remember me app/remFin/app/src/main/res/layout/activity_main.xml" value="0.1875" />
         <entry key="..\:/Users/ASUS/Desktop/Remember me app/remFin/app/src/main/res/layout/activity_nuevo.xml" value="0.1875" />
         <entry key="..\:/Users/ASUS/Desktop/Remember me app/remFin/app/src/main/res/layout/activity_pantalla.xml" value="0.1875" />
-        <entry key="..\:/Users/ASUS/Desktop/practicando Git/Remember-me_Dynamite/app/src/main/res/layout/activity_login_prueba.xml" value="0.2" />
-        <entry key="..\:/Users/ASUS/Desktop/practicando Git/Remember-me_Dynamite/app/src/main/res/layout/activity_nuevo.xml" value="0.1" />
-        <entry key="..\:/Users/ASUS/Desktop/practicando Git/Remember-me_Dynamite/app/src/main/res/layout/activity_pantalla.xml" value="0.11979166666666667" />
-        <entry key="..\:/Users/ASUS/Desktop/practicando Git/Remember-me_Dynamite/app/src/main/res/layout/activity_programareventode_adulto_mayor.xml" value="0.2" />
-        <entry key="..\:/Users/ASUS/Desktop/practicando Git/Remember-me_Dynamite/app/src/main/res/layout/activity_prueba_login2.xml" value="0.165625" />
-        <entry key="..\:/Users/ASUS/Desktop/practicando Git/Remember-me_Dynamite/app/src/main/res/layout/activity_ver.xml" value="0.2" />
+        <entry key="..\:/Users/ASUS/Desktop/proyectoIng/Remember-me_Dynamite/app/src/main/res/layout/activity_login.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/ASUS/Desktop/proyectoIng/Remember-me_Dynamite/app/src/main/res/layout/activity_main.xml" value="0.165625" />
+        <entry key="..\:/Users/ASUS/Desktop/proyectoIng/Remember-me_Dynamite/app/src/main/res/layout/activity_main_adulto2.xml" value="0.165625" />
+        <entry key="..\:/Users/ASUS/Desktop/proyectoIng/Remember-me_Dynamite/app/src/main/res/layout/activity_nuevo.xml" value="0.264" />
+        <entry key="..\:/Users/ASUS/Desktop/proyectoIng/Remember-me_Dynamite/app/src/main/res/layout/activity_pantalla.xml" value="0.10914855072463768" />
+        <entry key="..\:/Users/ASUS/Desktop/proyectoIng/Remember-me_Dynamite/app/src/main/res/layout/activity_programareventode_adulto_mayor.xml" value="0.264" />
+        <entry key="..\:/Users/ASUS/Desktop/proyectoIng/Remember-me_Dynamite/app/src/main/res/layout/activity_ver.xml" value="0.165625" />
+        <entry key="..\:/Users/ASUS/Desktop/proyectoIng/Remember-me_Dynamite/app/src/main/res/layout/activity_vernotificacion.xml" value="0.165625" />
+        <entry key="..\:/Users/ASUS/Desktop/proyectoIng/Remember-me_Dynamite/app/src/main/res/layout/programar.xml" value="0.264" />
+        <entry key="..\:/Users/Cris/Desktop/pruebagittt/Remember-me_Dynamite/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/Cris/Desktop/pruebagittt/Remember-me_Dynamite/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Cris/Desktop/pruebagittt/Remember-me_Dynamite/app/src/main/res/layout/activity_registro.xml" value="0.22" />
+        <entry key="..\:/Users/borut/Desktop/Repositorio2/Remember-me_Dynamite/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/borut/Desktop/Repositorio2/Remember-me_Dynamite/app/src/main/res/layout/activity_main_adulto2.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/borut/Desktop/Repositorio2/Remember-me_Dynamite/app/src/main/res/layout/activity_programareventode_adulto_mayor.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/borut/Desktop/Repositorio2/Remember-me_Dynamite/app/src/main/res/layout/activity_vernotificacion.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/borut/Desktop/Repositorio2/Remember-me_Dynamite/app/src/main/res/layout/programar.xml" value="0.11851851851851852" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/activity_login.xml" value="0.28802083333333334" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/activity_login_prueba.xml" value="0.28802083333333334" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/activity_main.xml" value="0.28802083333333334" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/activity_main_adulto2.xml" value="0.19202898550724637" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/activity_nuevo.xml" value="0.28802083333333334" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/activity_pantalla.xml" value="0.28802083333333334" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/activity_programareventode_adulto_mayor.xml" value="0.33" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/activity_registro.xml" value="0.16983695652173914" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/activity_ver.xml" value="0.28802083333333334" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/lista_item_contacto.xml" value="0.28802083333333334" />
+        <entry key="..\:/Users/mamani/Desktop/repostitorio/Remember-me_Dynamite/app/src/main/res/layout/programar.xml" value="0.28802083333333334" />
       </map>
     </option>
   </component>

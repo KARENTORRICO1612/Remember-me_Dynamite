@@ -21,7 +21,9 @@ public class DbContactos extends DbHelper {
     }
 
     public long insertarContacto(String titulo,String hora, String fecha, String direccion, String descripcion) {
-
+        /*
+        insertar un evento a la tabla
+         */
         long id = 0;
 
         try {
@@ -45,6 +47,10 @@ public class DbContactos extends DbHelper {
         return id;
     }
 
+
+        /*
+        mostrar la lista de eventos que tenemos
+         */
     public ArrayList<Contactos> mostrarContactos() {
 
         DbHelper dbHelper = new DbHelper(context);
@@ -67,7 +73,7 @@ public class DbContactos extends DbHelper {
                 contacto.setDescripcion(cursorContactos.getString(5));
 
                 listaContactos.add(contacto);
-            } while (cursorContactos.moveToNext());
+            } while (cursorContactos.moveToNext()); //se trae cada evento a la lista
         }
 
         cursorContactos.close();
@@ -75,6 +81,10 @@ public class DbContactos extends DbHelper {
         return listaContactos;
     }
 
+
+    /*
+    método ver un solo evento que se selecione
+     */
     public Contactos verContacto(int id) {
 
         DbHelper dbHelper = new DbHelper(context);
@@ -100,6 +110,9 @@ public class DbContactos extends DbHelper {
         return contacto;
     }
 
+    /*
+    Editar un evento
+     */
     public boolean editarContacto(int id, String titulo,String hora, String fecha, String direccion, String descripcion) {
 
         boolean correcto = false;
@@ -120,6 +133,10 @@ public class DbContactos extends DbHelper {
         return correcto;
     }
 
+
+    /*
+    Eliminar un evento
+     */
     public boolean eliminarContacto(int id) {
 
         boolean correcto = false;

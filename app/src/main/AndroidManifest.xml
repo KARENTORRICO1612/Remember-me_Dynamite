@@ -4,29 +4,63 @@
     android:versionCode="2"
     android:versionName="1.1">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    //lo siguiente son permisos para las notificaciones
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- MAKE ALARMS RESTART ON REBOOT -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    //hasta aqui los permisos para notificaciones
+
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_portada"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
+            android:name=".mainAdulto2"
+            android:exported="false" />
+        <activity
+
             android:name=".loginPrueba"
             android:exported="false" />
         <activity
             android:name=".programareventodeAdultoMayor"
             android:exported="false" />
+
         <activity
-            android:name=".pruebaLogin2"
+
+            android:name=".vernotificacion"
             android:exported="false" />
         <activity
+
             android:name=".NuevoActivity"
+            android:parentActivityName=".mainAdulto2"/>
+
+        <activity
+            android:name=".LoginActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".RegistroActivity"
             android:parentActivityName=".MainActivity">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".pantalla">
+        <activity android:name=".pantalla"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,11 +69,13 @@
         </activity>
         <activity
             android:name=".VerActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".mainAdulto2">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+
         <activity
             android:name=".EditarActivity"
             android:parentActivityName=".MainActivity">
@@ -47,7 +83,32 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <activity android:name=".MainActivity"></activity>
+
+
+
+
+        <receiver
+            android:name="com.cdp.agenda.AlarmReceiver"
+            android:enabled="true" />
+
+        <service
+            android:name="com.cdp.agenda.NotificationService"
+            android:enabled="true" /> <!-- MAKE ALARMS RESTART ON REBOOT -->
+
+        <service android:name=".RebootServiceClass" />
+
+        <receiver android:name=".MyRebootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+
     </application>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 </manifest>

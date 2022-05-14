@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
-
+    /*
+    CREAR LA BD
+     */
     private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NOMBRE = "agenda.db";
     public static final String TABLE_CONTACTOS = "t_contactos";
@@ -30,7 +32,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        /*
+        se ejecuta cuando se cambia de version
+         */
         sqLiteDatabase.execSQL("DROP TABLE " + TABLE_CONTACTOS);
         onCreate(sqLiteDatabase);
 

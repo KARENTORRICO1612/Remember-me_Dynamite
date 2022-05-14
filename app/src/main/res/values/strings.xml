@@ -4,4 +4,29 @@
     <string name="hint_direccion">Dirección:</string>
     <string name="hint_descripcion">Descripción:</string>
     <string name="btn_guarda"> Guardar </string>
+
+    <string name="Seleccionar_Adulto">Seleccionar_Adulto</string>
+
+
+    //variables para registro
+    <string name="hint_Nombre">Nombre de usuario</string>
+    <string name="hint_Contra">Escribe tu Contraseña</string>
+    <string name="hint_ConfiContra">Escribe tu Contraseña</string>
+
+    <string name="btn_Registrar">Registrar</string>
+    <string name="btn_Cancelar">Cancelar</string>
+
+    <string name="txt_Titulo">Registrar Usuario</string>
+    <string name="txt_NombreUsu">Nombre de Usuario:</string>
+    <string name="txt_Contra">Contraseña:</string>
+    <string name="txt_ConfiContra">Confirmar Contraseña:</string>
+    <string name="txt_Rol">Rol:</string>
+    <string name="txt_MostrarContra">Mostrar Contraseña:</string>
+    <string name="txt_MostrarConfiContra">Mostrar Contraseña:</string>
+    //fin
+    <string-array name="Rol">
+        <item>Adulto</item>
+        <item>Responsable</item>
+    </string-array>
+
 </resources>
