@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity  {
                         //jsonObject = response.getJSONObject(0);
                         //txtTitulo.setText(response.getString(0));
                         listAdultos.add(response.getString(i));
-                        Toast.makeText(getApplicationContext(),"ingreso consulta", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getApplicationContext(),"ingreso consulta", Toast.LENGTH_SHORT).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

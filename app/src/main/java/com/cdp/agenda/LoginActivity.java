@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     //variables que guardaran lo que escriba es usuario
     String usuario;
     String contra;
+    String  tUser;
 
     //para el control de sesion activa NO TOCAR
     SharedPreferences sp;
@@ -57,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
         usuario=user.getEditText().getText().toString().trim();
         contra=contrasenia.getEditText().getText().toString().trim();
+
 
         String r = String.valueOf(spiRol.getSelectedItem());
         if(!user.getEditText().getText().toString().equals("") && !contrasenia.getEditText().getText().toString().equals("")){
@@ -101,9 +103,10 @@ public class LoginActivity extends AppCompatActivity {
                             if (contrasenia.equals(contra)) {
 
                                 if(rol.equals("adulto")) {
+                                    tUser="adulto";
                                     guardarSesion("Adulto");
                                     Intent intent = new Intent(LoginActivity.this, mainAdulto2.class);
-                                    intent.putExtra("tipoDeUsuario","adulto");
+                                    intent.putExtra("tipoDeUsuario",tUser);
                                     intent.putExtra("usuarioLogin",usuario);
                                     intent.putExtra("contraseniaLogin",contra);
                                     startActivity(intent);
@@ -111,9 +114,10 @@ public class LoginActivity extends AppCompatActivity {
                                     finish();
                                 }
                                 if(rol.equals("responsable")){
+                                    tUser="responsable";
                                     guardarSesion("Responsable");
                                     Intent intent= new Intent(LoginActivity.this,MainActivity.class);//ventana del responsable
-                                    intent.putExtra("tipoDeUsuario","responsable");
+                                    intent.putExtra("tipoDeUsuario",tUser);
                                     intent.putExtra("usuarioLogin",usuario);
                                     intent.putExtra("contraseniaLogin",contra);
                                     startActivity(intent);
@@ -151,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
             SharedPreferences.Editor spe = sp.edit();
             spe.putString("user",usuario);
             spe.putString("pass",contra);
+            spe.putString("tUser",tUser);
             spe.putString("rol",rols);
             spe.commit();
         }catch (Exception e){
@@ -161,18 +166,21 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sp=getSharedPreferences("PruebaLogin", Context.MODE_PRIVATE);
         String u=sp.getString("user","null");
         String p=sp.getString("pass","null");
+        String tU=sp.getString("tUser","null");
         String r=sp.getString("rol","null");
         if(!u.equals("null") && !p.equals("null")){
             if(r.equals("Adulto")){
                 Intent intent = new Intent(LoginActivity.this,mainAdulto2.class);
                 intent.putExtra("usuarioLogin",u);
                 intent.putExtra("contraseniaLogin",p);
+                intent.putExtra("tipoDeUsuario",tU);
                 startActivity(intent);
                 finish();
             }else{
                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                 intent.putExtra("usuarioLogin",u);
                 intent.putExtra("contraseniaLogin",p);
+                intent.putExtra("tipoDeUsuario",tU);
                 startActivity(intent);
                 finish();
             }

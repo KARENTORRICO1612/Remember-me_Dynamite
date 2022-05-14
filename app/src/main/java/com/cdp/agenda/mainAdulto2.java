@@ -56,15 +56,17 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_adulto2);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//para bloquear el giro de pantalla
-        requestQueue= Volley.newRequestQueue(this);
-        sp=getSharedPreferences("PruebaLogin", Context.MODE_PRIVATE);
-
+        requestQueue = Volley.newRequestQueue(this);
+        sp = getSharedPreferences("PruebaLogin", Context.MODE_PRIVATE);
+      //  tipoDeUsuario=getIntent().getStringExtra("tipoDeUsuario");
         txtBuscar = findViewById(R.id.txtBuscar);
         listaContactos = findViewById(R.id.listaContactos);
         fabNuevo = findViewById(R.id.favNuevo);
         listaContactos.setLayoutManager(new LinearLayoutManager(this));
 
-        if(getIntent().getExtras()!=null){
+          if(getIntent().getExtras()!=null) {
+
+          }
             //recibimos los valores
             getUserA=getIntent().getExtras();
             getContraA=getIntent().getExtras();
@@ -72,10 +74,11 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
             //guardamos los valores
             nameGetA=getUserA.getString("usuarioLogin");
             passwordGetA=getContraA.getString("contraseniaLogin");
-            tipoDeUsuario=getTU.getString("tipoDeUsuario");
+             tipoDeUsuario = getTU.getString("tipoDeUsuario");
 
+          // Toast.makeText(mainAdulto2.this, tipoDeUsuario+"nombreAdulto: "+nameGetA, Toast.LENGTH_LONG).show();
             //fin, ahora pueden usar las variables nameGetA,passwordGetA como requieran
-        }
+        //
         //DbContactos dbContactos = new DbContactos(mainAdulto2.this);
         listaArrayContactos = new ArrayList<>();
         //adapter = new ListaContactosAdapter(dbContactos.mostrarContactos());

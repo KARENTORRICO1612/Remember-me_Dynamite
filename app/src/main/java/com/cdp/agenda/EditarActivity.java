@@ -249,7 +249,7 @@ public class EditarActivity extends AppCompatActivity {
                 Intent intent = new Intent(actividad, mainAdulto2.class);
                 intent.putExtra("usuarioLogin",nomAdulto);
                 intent.putExtra("tipoDeUsuario",tipoDeUsuario);
-                if(tipoDeUsuario.equals("adulto")) {
+               if(tipoDeUsuario.equals("adulto")) {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 }
                 startActivity(intent);
