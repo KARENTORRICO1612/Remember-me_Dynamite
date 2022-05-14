@@ -52,15 +52,14 @@
                 android:id="@+id/aFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:background="@android:color/white"
-                android:backgroundTint="#005F73"
                 android:minWidth="88dip"
                 android:minHeight="44dip"
                 android:rotationY="2"
                 android:text="FECHA"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/widget_edittext_dark"
                 android:textSize="20sp"
-                tools:text="    Fecha" />
+                android:textStyle="bold"
+                tools:text="Fecha" />
 
             <TextView
                 android:id="@+id/eFecha"
@@ -74,15 +73,14 @@
                 android:id="@+id/aHora"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:background="@android:color/white"
-                android:backgroundTint="#005F73"
                 android:minWidth="88dip"
                 android:minHeight="44dip"
                 android:rotationY="2"
                 android:text="HORA"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/widget_edittext_dark"
                 android:textSize="20sp"
-                tools:text="    Hora" />
+                android:textStyle="bold"
+                tools:text="Hora" />
 
             <TextView
                 android:id="@+id/eHora"

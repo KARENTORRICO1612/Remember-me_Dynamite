@@ -52,6 +52,24 @@
                 android:textSize="20sp" />
 
             <Button
+                android:id="@+id/bFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#005F73"
+                android:onClick="onClick"
+                android:text="Fecha"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/eFecha"
+                android:layout_width="166dp"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:textColor="#181718"
+                android:textSize="24sp" />
+
+            <Button
                 android:id="@+id/bHora"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,24 +89,6 @@
                 android:textColor="#100F0F"
                 android:textSize="24sp" />
 
-            <Button
-                android:id="@+id/bFecha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#005F73"
-                android:onClick="onClick"
-                android:text="Fecha"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/eFecha"
-                android:layout_width="166dp"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:textColor="#181718"
-                android:textSize="24sp" />
-
             <TextView
                 android:id="@+id/viewDireccion"
                 android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
                 android:layout_height="70dp"
                 android:background="#FFFFFF"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:labelFor="@+id/viewDireccion"
                 android:maxLength="50"
                 android:textSize="20sp" />
@@ -124,7 +124,7 @@
                 android:layout_height="67dp"
                 android:background="#FFFFFF"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:labelFor="@+id/viewDescripcion"
                 android:maxLength="70"
                 android:textSize="20sp" />

@@ -85,7 +85,7 @@ public class NuevoActivity extends AppCompatActivity {
 
 
 
-                if (!txtTitulo.getText().toString().equals("")
+                if (!txtTitulo.getText().toString().trim().isEmpty()
                         && !eFecha.getText().toString().equals("")&& !eHora.getText().toString().equals("")) {
                     registrarActivity(titulo,time,fecha,direccion,descripcion,nomAdulto);
                     String[] parts = txtTitulo.getText().toString().split("");
@@ -193,25 +193,53 @@ public class NuevoActivity extends AppCompatActivity {
         }
         if (v == bHora) {
             final Calendar c = Calendar.getInstance();
-            int hora = c.get(Calendar.HOUR_OF_DAY);
-            int minutos = c.get(Calendar.MINUTE);
+            int horaActual = c.get(Calendar.HOUR_OF_DAY);
+            int minutosActual = c.get(Calendar.MINUTE);
+
+            //para bug 9 dias pasados
+            int diaActual = c.get(Calendar.DAY_OF_MONTH);
+            int mesActual = c.get(Calendar.MONTH);
+            int anioActual = c.get(Calendar.YEAR);
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     String finalHour, finalMinute; //notificaciones
+                    if(diaActual==DIA && mesActual==MES && anioActual==GESTION ){
+                        if(horaActual==hourOfDay){
+                            if(minutosActual<minute){
+                                eHora.setText(String.format("%02d:%02d", hourOfDay, minute));
 
-                    eHora.setText(String.format("%02d:%02d", hourOfDay, minute));
+                                finalHour = "" + hourOfDay;//notificaciones
+                                finalMinute = "" + minute; //notificaciones
+                                if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
+                                if(minute < 10) finalMinute = "0" + minute; //notificaciones
+                            }else{
+                                Toast.makeText(NuevoActivity.this, "NO SE PUEDEN REGISTRAR HORAS PASADAS", Toast.LENGTH_SHORT).show();
+                            }
 
-                    finalHour = "" + hourOfDay;//notificaciones
-                    finalMinute = "" + minute; //notificaciones
-                    if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
-                    if(minute < 10) finalMinute = "0" + minute; //notificaciones
 
-                    HORA = hourOfDay;
-                    MINUTO = minute;
+                        }else if(horaActual<hourOfDay){
+                            eHora.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                            finalHour = "" + hourOfDay;//notificaciones
+                            finalMinute = "" + minute; //notificaciones
+                            if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
+                            if(minute < 10) finalMinute = "0" + minute; //notificaciones
+                        }else{
+                            Toast.makeText(NuevoActivity.this, "NO SE PUEDEN REGISTRAR HORAS PASADAS", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else{
+                        eHora.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                        finalHour = "" + hourOfDay;//notificaciones
+                        finalMinute = "" + minute; //notificaciones
+                        if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
+                        if(minute < 10) finalMinute = "0" + minute; //notificaciones
+                    }
                 }
-            }, hora, minutos, false);
+            }, horaActual, minutosActual, false);
             timePickerDialog.show();
         }
     }

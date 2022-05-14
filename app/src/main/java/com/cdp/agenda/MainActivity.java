@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -56,12 +57,21 @@ public class MainActivity extends AppCompatActivity  {
     FloatingActionButton fabNuevo;
     //ListaContactosAdapter adapter;
 
+    //para mostrar nombre del usuario en pantalla
+    TextView nameuser;
+
 
     //para recibir los valores de login
     Bundle getUserR,getContraR;
     //para guardar los valores recibidos de login
     String nameGetR,passwordGetR;
     ///fin
+
+    //para bug2 spinner
+    Boolean spinnerlleno;
+
+    //nombre seleccionado del spinner
+    String nameSpiner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +97,24 @@ public class MainActivity extends AppCompatActivity  {
         spinner = findViewById(R.id.spinner);
         boton = (Button) findViewById(R.id.button2);
         idverLista= (Button) findViewById(R.id.idverLista);
+        nameuser=findViewById(R.id.nameUser);
+        nameuser.setText(nameGetR);
+        spinnerlleno=false;
 
         //Acciones del boton
          idverLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( MainActivity.this,mainAdulto2.class);
-                startActivity(intent);
+                if(spinner.getSelectedItem()!=null){
+                    nameSpiner=spinner.getSelectedItem().toString();
+                    Toast.makeText(MainActivity.this, ""+nameSpiner, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent( MainActivity.this,mainAdulto2.class);
+                    intent.putExtra("usuarioLogin","Responsable");
+                    intent.putExtra("contraseniaLogin","Responsable");
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(MainActivity.this, "Debe seleccionar un aduto mayor", Toast.LENGTH_SHORT).show();
+                }
             }
          });
 
@@ -102,7 +123,9 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 String URL="https://bdconandroidstudio.000webhostapp.com/adultosACargoDeResp.php?r_nombre="+nameGetR;
-                buscarAdultos(URL);
+                if(spinnerlleno==false){
+                    buscarAdultos(URL);
+                }
             }
            });
 
@@ -112,8 +135,14 @@ public class MainActivity extends AppCompatActivity  {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent( MainActivity.this,programareventodeAdultoMayor.class);
-                    startActivity(i);
+                    if(spinner.getSelectedItem()!=null){
+                        nameSpiner=spinner.getSelectedItem().toString();//con esto guardamos
+                        Toast.makeText(MainActivity.this, ""+nameSpiner, Toast.LENGTH_SHORT).show();
+                        /*Intent i = new Intent( MainActivity.this,programareventodeAdultoMayor.class);
+                        startActivity(i);*/
+                    }else{
+                        Toast.makeText(MainActivity.this, "Debe seleccionar un aduto mayor", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
     }
@@ -125,8 +154,8 @@ public class MainActivity extends AppCompatActivity  {
         //usuarios.add(new Usuario(2,"luis","Pacheco","Hernandez"));
         //usuarios.add(new Usuario(3,"macario","Choque","Mento"));
        // usuarios.add(new Usuario(4,"maria","Alvarado","Veliz"));
-
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,listAdultos);
+        spinnerlleno=true;
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this,R.layout.spinner_item_cristhian,listAdultos);
         spinner.setAdapter(adapter1);
 
 
@@ -209,7 +238,7 @@ public class MainActivity extends AppCompatActivity  {
                         //jsonObject = response.getJSONObject(0);
                         //txtTitulo.setText(response.getString(0));
                         listAdultos.add(response.getString(i));
-                        Toast.makeText(getApplicationContext(),"ingreso consulta", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"ingreso consulta", Toast.LENGTH_SHORT).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

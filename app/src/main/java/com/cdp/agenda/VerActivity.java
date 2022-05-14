@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,9 @@ public class VerActivity extends AppCompatActivity {
     String titulo,hora,fecha,direccion,descripcion;
     String nomAdulto;
 
+    //para bug 11 y 12 de la 2corrida 2 sprint
+    TextView aFecha,aHora;
+
     Contactos contacto;
     int id = 0;
     private RequestQueue requestQueue;
@@ -57,6 +61,15 @@ public class VerActivity extends AppCompatActivity {
         eFecha = findViewById(R.id.eFecha);
         txtDireccion = findViewById(R.id.txtDireccion);
         txtDescripcion = findViewById(R.id.txtDescripcion);
+
+        //para bug 11 y 12
+        aHora=findViewById(R.id.aHora);
+        aFecha=findViewById(R.id.aFecha);
+        aHora.setBackground(null);
+        aFecha.setBackground(null);
+        aHora.setTextColor(Color.parseColor("#000000"));
+        aFecha.setTextColor(Color.parseColor("#000000"));
+        //Fecha.fin bug
 
         fabEditar = findViewById(R.id.fabEditar);
         fabEliminar = findViewById(R.id.fabEliminar);
