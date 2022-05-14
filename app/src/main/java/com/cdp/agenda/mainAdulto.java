@@ -50,8 +50,7 @@ public class mainAdulto extends AppCompatActivity implements SearchView.OnQueryT
 
                 listaArrayContactos = new ArrayList<>();
 
-                adapter = new ListaContactosAdapter(dbContactos.mostrarContactos());
-                listaContactos.setAdapter(adapter);
+
 
                 fabNuevo.setOnClickListener(new View.OnClickListener() {
                         @Override

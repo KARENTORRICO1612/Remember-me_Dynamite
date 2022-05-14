@@ -46,7 +46,7 @@ public class EditarActivity extends AppCompatActivity {
     FloatingActionButton fabEditar, fabEliminar;
     boolean correcto = false;
     String titulo,hora,fecha,direccion,descripcion;
-    String nomAdulto;
+    String nomAdulto,tipoDeUsuario;
     String ID;
     Contactos contacto;
     int id = 0;
@@ -65,6 +65,7 @@ public class EditarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ver);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        tipoDeUsuario=getIntent().getStringExtra("tipoDeUsuario");
         ID=getIntent().getStringExtra("ID");
         titulo= getIntent().getStringExtra("titulo");
         hora=   getIntent().getStringExtra("hora");
@@ -247,9 +248,12 @@ public class EditarActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "MODIFICACION EXITOSA", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(actividad, mainAdulto2.class);
                 intent.putExtra("usuarioLogin",nomAdulto);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("tipoDeUsuario",tipoDeUsuario);
+                if(tipoDeUsuario.equals("adulto")) {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                }
                 startActivity(intent);
-                //finish();
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override

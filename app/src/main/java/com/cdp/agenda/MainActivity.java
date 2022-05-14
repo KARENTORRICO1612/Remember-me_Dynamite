@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity  {
     private Button idverLista;
     private RequestQueue requestQueue;
     private ArrayList<String> listAdultos;
-
+    private boolean actualizado;
     //para control de sesion NOTOCAR
     SharedPreferences sp;
     //notocar
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity  {
 
     //para recibir los valores de login
     Bundle getUserR,getContraR;
+    String nomAdulto;
     //para guardar los valores recibidos de login
     String nameGetR,passwordGetR;
     ///fin
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.programar);
+        actualizado=false;
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//para bloquear el giro de pantalla
         sp=getSharedPreferences("PruebaLogin", Context.MODE_PRIVATE);
 
@@ -87,33 +89,48 @@ public class MainActivity extends AppCompatActivity  {
         spinner = findViewById(R.id.spinner);
         boton = (Button) findViewById(R.id.button2);
         idverLista= (Button) findViewById(R.id.idverLista);
-
         //Acciones del boton
-         idverLista.setOnClickListener(new View.OnClickListener() {
+         idverLista.setOnClickListener(new View.OnClickListener() { //actualizar lista
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( MainActivity.this,mainAdulto2.class);
-                startActivity(intent);
+                if(actualizado) {
+                    nomAdulto = spinner.getSelectedItem().toString();
+                    Intent intent = new Intent(MainActivity.this, mainAdulto2.class);
+                    intent.putExtra("usuarioLogin", nomAdulto);
+                    intent.putExtra("tipoDeUsuario", "responsable");
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(MainActivity.this, "Seleccione un Adulto", Toast.LENGTH_LONG).show();
+                }
             }
          });
 
 
-           boton.setOnClickListener(new View.OnClickListener() {//boton actualuzar creo
+           boton.setOnClickListener(new View.OnClickListener() {//boton actualuzar spinner creo
             @Override
             public void onClick(View view) {
-                String URL="https://bdconandroidstudio.000webhostapp.com/adultosACargoDeResp.php?r_nombre="+nameGetR;
-                buscarAdultos(URL);
+                if(!actualizado) {
+                    actualizado=true;
+                    String URL = "https://bdconandroidstudio.000webhostapp.com/adultosACargoDeResp.php?r_nombre=" + nameGetR;
+                    buscarAdultos(URL);
+                }
             }
            });
 
 
             button = (Button)findViewById(R.id.button);
 
-            button.setOnClickListener(new View.OnClickListener() {
+            button.setOnClickListener(new View.OnClickListener() { //programar evento del adulto mayor
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent( MainActivity.this,programareventodeAdultoMayor.class);
-                    startActivity(i);
+                    if(actualizado) {
+                        nomAdulto = spinner.getSelectedItem().toString();
+                        Intent i = new Intent(MainActivity.this, programareventodeAdultoMayor.class);
+                        i.putExtra("usuarioLogin", nomAdulto);
+                        startActivity(i);
+                    }else{
+                        Toast.makeText(MainActivity.this, "Seleccione un Adulto", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
     }

@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -39,8 +40,9 @@ public class VerActivity extends AppCompatActivity {
     FloatingActionButton fabEditar, fabEliminar;
     TextView eFecha,eHora;
     String titulo,hora,fecha,direccion,descripcion;
-    String nomAdulto;
-
+    String nomAdulto,tipoDeUsuario;
+    mainAdulto2 pantallaAnt;
+    Bundle main2Anterior;
     Contactos contacto;
     int id = 0;
     private RequestQueue requestQueue;
@@ -52,6 +54,10 @@ public class VerActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         requestQueue= Volley.newRequestQueue(this);
         nomAdulto = getIntent().getStringExtra("nombreAdulto");
+        tipoDeUsuario=getIntent().getStringExtra("tipoDeUsuario");
+        main2Anterior = getIntent().getExtras();
+        pantallaAnt=new mainAdulto2();
+        pantallaAnt= (mainAdulto2) main2Anterior.getSerializable("main2Anterior");
         txtTitulo = findViewById(R.id.txtTitulo);
         eHora = findViewById(R.id.eHora);
         eFecha = findViewById(R.id.eFecha);
@@ -99,6 +105,7 @@ public class VerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(VerActivity.this, EditarActivity.class);
+                intent.putExtra("tipoDeUsuario",tipoDeUsuario);
                 intent.putExtra("ID", id+"");
                 intent.putExtra("titulo",titulo);
                 intent.putExtra("hora",hora);
@@ -137,11 +144,15 @@ public class VerActivity extends AppCompatActivity {
     }
 
     private void lista(){
+       // ((Activity) pantallaAnt).finish();
         Intent intent = new Intent(VerActivity.this, mainAdulto2.class);
         intent.putExtra("usuarioLogin",nomAdulto);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("tipoDeUsuario",tipoDeUsuario);
+        if(tipoDeUsuario.equals("adulto")) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }
         startActivity(intent);
-       // finish();
+        finish();
     }
     private void obtenerDatosEvento(String URL){
         // Toast.makeText(getApplicationContext(), "se hizo la consulta", Toast.LENGTH_SHORT).show();

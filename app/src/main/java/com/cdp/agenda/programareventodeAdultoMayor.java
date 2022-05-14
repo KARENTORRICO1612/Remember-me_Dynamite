@@ -48,6 +48,7 @@ public class programareventodeAdultoMayor extends AppCompatActivity {
     private int dia, mes, anio, hora, minutos;
     private String titulo,time,fecha,direccion,descripcion;
     RequestQueue requestQueue;
+    String nomAdul;
 
     private int alarmID = 1; //para notificaciones
 
@@ -60,7 +61,8 @@ public class programareventodeAdultoMayor extends AppCompatActivity {
         setContentView(R.layout.activity_programareventode_adulto_mayor);
         requestQueue= Volley.newRequestQueue(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+        nomAdul = getIntent().getStringExtra("usuarioLogin");
+        actividad=this;
 //------------------------DARWYN
         aHora=(Button)findViewById(R.id.Hora);
         aFecha=(Button)findViewById(R.id.Fecha);
@@ -129,7 +131,7 @@ public class programareventodeAdultoMayor extends AppCompatActivity {
                         return;
                     }
 
-                    id = (int) dbContactos.insertarContacto(txtTitulo.getText().toString(), eHora.getText().toString(), eFecha.getText().toString(),
+                    /*id = (int) dbContactos.insertarContacto(txtTitulo.getText().toString(), eHora.getText().toString(), eFecha.getText().toString(),
                             txtDireccion.getText().toString(), txtDescripcion.getText().toString()
                     );
 
@@ -149,6 +151,8 @@ public class programareventodeAdultoMayor extends AppCompatActivity {
                     } else {
                         Toast.makeText(programareventodeAdultoMayor.this, "ERROR AL REGISTRAR ACTIVIDAD", Toast.LENGTH_LONG).show();
                     }
+
+                     */
                 } else {
                     eHora.setError("");
                     eFecha.setError("");
@@ -243,7 +247,13 @@ public class programareventodeAdultoMayor extends AppCompatActivity {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Actividad Registrada", Toast.LENGTH_SHORT).show();
+                limpiar();
+                Intent intent = new Intent(actividad, mainAdulto2.class);
+                intent.putExtra("usuarioLogin",nomAdul);
+                intent.putExtra("tipoDeUsuario","responsable");
+                startActivity(intent);
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -260,12 +270,21 @@ public class programareventodeAdultoMayor extends AppCompatActivity {
                 parametros.put("fecha",fecha);
                 parametros.put("descripcion",descripcion);
                 parametros.put("direccion",direccion);
+                parametros.put("adulto_r",nomAdul);
 
                 return parametros;
             }
         };
 
         requestQueue.add(stringRequest);
+
+    }
+    private void limpiar() {
+        txtTitulo.setText("");
+        eHora.setText("");
+        eFecha.setText("");
+        txtDireccion.setText("");
+        txtDescripcion.setText("");
 
     }
 }

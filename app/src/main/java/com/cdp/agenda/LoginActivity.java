@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if(rol.equals("adulto")) {
                                     guardarSesion("Adulto");
                                     Intent intent = new Intent(LoginActivity.this, mainAdulto2.class);
+                                    intent.putExtra("tipoDeUsuario","adulto");
                                     intent.putExtra("usuarioLogin",usuario);
                                     intent.putExtra("contraseniaLogin",contra);
                                     startActivity(intent);
@@ -112,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if(rol.equals("responsable")){
                                     guardarSesion("Responsable");
                                     Intent intent= new Intent(LoginActivity.this,MainActivity.class);//ventana del responsable
+                                    intent.putExtra("tipoDeUsuario","responsable");
                                     intent.putExtra("usuarioLogin",usuario);
                                     intent.putExtra("contraseniaLogin",contra);
                                     startActivity(intent);

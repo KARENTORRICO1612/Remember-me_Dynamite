@@ -226,6 +226,7 @@ public class NuevoActivity extends AppCompatActivity {
                 limpiar();
                 Intent intent = new Intent(actividad, mainAdulto2.class);
                 intent.putExtra("usuarioLogin",nomAdulto);
+                intent.putExtra("tipoDeUsuario","adulto");
                 startActivity(intent);
                 finish();
             }

@@ -30,18 +30,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQueryTextListener, Serializable {
     SearchView txtBuscar;
     RecyclerView listaContactos;
     ArrayList<Contactos> listaArrayContactos;
     FloatingActionButton fabNuevo;
     ListaContactosAdapter adapter;
     RequestQueue requestQueue;
-
+    String tipoDeUsuario;
     //para recibir los valores de login
-    Bundle getUserA,getContraA;
+    Bundle getUserA,getContraA,getTU;
     //para guardar los valores recibidos de login
     String nameGetA,passwordGetA;
     ///fin
@@ -67,9 +68,12 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
             //recibimos los valores
             getUserA=getIntent().getExtras();
             getContraA=getIntent().getExtras();
+            getTU=getIntent().getExtras();
             //guardamos los valores
             nameGetA=getUserA.getString("usuarioLogin");
             passwordGetA=getContraA.getString("contraseniaLogin");
+            tipoDeUsuario=getTU.getString("tipoDeUsuario");
+
             //fin, ahora pueden usar las variables nameGetA,passwordGetA como requieran
         }
         //DbContactos dbContactos = new DbContactos(mainAdulto2.this);
@@ -115,7 +119,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
 
                 }
                 // llenar();
-                adapter = new ListaContactosAdapter(lista);
+                adapter = new ListaContactosAdapter(lista,tipoDeUsuario,mainAdulto2.this);
                 listaContactos.setAdapter(adapter);
 
             }
@@ -185,4 +189,8 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         return false;
     }
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
 }

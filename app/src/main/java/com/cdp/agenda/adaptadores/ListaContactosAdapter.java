@@ -2,6 +2,7 @@ package com.cdp.agenda.adaptadores;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cdp.agenda.R;
 import com.cdp.agenda.VerActivity;
 import com.cdp.agenda.entidades.Contactos;
+import com.cdp.agenda.mainAdulto2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,11 +25,16 @@ public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAd
 
     ArrayList<Contactos> listaContactos;
     ArrayList<Contactos> listaOriginal;
+    String tipoDeUsuario;
+    mainAdulto2 pantallaAnt;
 
-    public ListaContactosAdapter(ArrayList<Contactos> listaContactos) {
+
+    public ListaContactosAdapter(ArrayList<Contactos> listaContactos, String tipoU, mainAdulto2 pantalla) {
         this.listaContactos = listaContactos;
         listaOriginal = new ArrayList<>();
         listaOriginal.addAll(listaContactos);
+        this.tipoDeUsuario=tipoU;
+        this.pantallaAnt=pantalla;
     }
 
     @NonNull
@@ -86,10 +94,14 @@ public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAd
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Bundle bundle= new Bundle();
+                    bundle.putSerializable("main2Anteror",pantallaAnt);
                     Context context = view.getContext(); //recuperan el id del evento seleccionado
                     Intent intent = new Intent(context, VerActivity.class);
                     intent.putExtra("ID", listaContactos.get(getAdapterPosition()).getId());
                     intent.putExtra("nombreAdulto",listaContactos.get(getAdapterPosition()).getAdulto_r());
+                    intent.putExtra("tipoDeUsuario",tipoDeUsuario);
+                    //intent.putExtra("main2Anterior",(Serializable) pantallaAnt);
                     context.startActivity(intent);
                 }
             });
