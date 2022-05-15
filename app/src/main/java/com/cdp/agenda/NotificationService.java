@@ -80,7 +80,8 @@ public class NotificationService extends IntentService {
 
 
         Resources res = this.getResources();
-        Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.relojconalarma); //para el sonido de la alarma
+        //Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.relojconalarma); //para el sonido de la alarma
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
 
         String tituloda = "sin nada";
         String message = "sin nada";

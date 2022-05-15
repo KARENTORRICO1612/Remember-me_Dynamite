@@ -152,7 +152,7 @@ public class EditarActivity extends AppCompatActivity {
                      //       txtDireccion.getText().toString(), txtDescripcion.getText().toString()
                        //     );
 
-                    Calendar today = Calendar.getInstance();
+                    /*Calendar today = Calendar.getInstance();
 
                     today.set(GESTION, MES, DIA, HORA, MINUTO, 0);
 
