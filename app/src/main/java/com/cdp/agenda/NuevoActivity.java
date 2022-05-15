@@ -214,6 +214,8 @@ public class NuevoActivity extends AppCompatActivity {
                                 finalMinute = "" + minute; //notificaciones
                                 if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
                                 if(minute < 10) finalMinute = "0" + minute; //notificaciones
+                                HORA = hourOfDay;
+                                MINUTO = minute;
                             }else{
                                 Toast.makeText(NuevoActivity.this, "No se pueden registrar horas pasadas", Toast.LENGTH_SHORT).show();
                             }
@@ -226,6 +228,8 @@ public class NuevoActivity extends AppCompatActivity {
                             finalMinute = "" + minute; //notificaciones
                             if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
                             if(minute < 10) finalMinute = "0" + minute; //notificaciones
+                            HORA = hourOfDay;
+                            MINUTO = minute;
                         }else{
                             Toast.makeText(NuevoActivity.this, "No se pueden registrar horas pasadas", Toast.LENGTH_SHORT).show();
                         }
@@ -237,6 +241,8 @@ public class NuevoActivity extends AppCompatActivity {
                         finalMinute = "" + minute; //notificaciones
                         if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
                         if(minute < 10) finalMinute = "0" + minute; //notificaciones
+                        HORA = hourOfDay;
+                        MINUTO = minute;
                     }
                 }
             }, horaActual, minutosActual, false);
