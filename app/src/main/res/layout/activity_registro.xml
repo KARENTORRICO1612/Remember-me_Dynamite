@@ -18,63 +18,61 @@
             android:id="@+id/txttitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="20dp"
             android:text="@string/txt_Titulo"
+
             android:textColor="#000000"
             android:textSize="30sp"
-            android:textStyle="bold"
-
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtusuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:text="@string/txt_NombreUsu"
+
             android:textColor="#000000"
             android:textSize="24sp"
-            android:textStyle="bold"
-
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/inputnombre"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:ems="10"
-            android:maxLength="23"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="20dp"
             android:background="#ffffff"
-            android:inputType="text"
-            android:labelFor="@+id/viewTitulo"
             android:digits="ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789@!#$%'()*+,-./:;=¡¿?[\]^_`{|}~"
-            android:textSize="20sp"
-
+            android:ems="10"
             android:hint="@string/hint_Nombre"
 
-            android:layout_marginTop="1dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:inputType="text"
+
+            android:labelFor="@+id/viewTitulo"
+            android:maxLength="23"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            />
+            android:textSize="20sp" />
 
 
         <TextView
             android:id="@+id/txtcontra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:text="@string/txt_Contra"
+
             android:textColor="#000000"
             android:textSize="24sp"
-            android:textStyle="bold"
-
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"/>
+            android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/contrasenia"
@@ -82,8 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
 
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="#ffffff"
             android:hint="@string/hint_Contra"
             app:boxBackgroundMode="outline"
@@ -115,26 +113,25 @@
 
 
                 android:inputType="textPassword"
+                android:maxLength="23"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
-                android:maxLength="23"
-                android:textSize="23sp" />
+                android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
 
         <TextView
             android:id="@+id/txtconficontra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="20dp"
             android:text="@string/txt_ConfiContra"
+
             android:textColor="#000000"
             android:textSize="24sp"
-            android:textStyle="bold"
-
-            android:layout_marginTop="0dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"/>
+            android:textStyle="bold" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -143,9 +140,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
 
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="#ffffff"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
             android:hint="@string/hint_Contra"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="0dp"
@@ -174,51 +171,50 @@
                 android:hint="@string/hint_Contra"
 
                 android:inputType="textPassword"
-                android:paddingTop="15dp"
                 android:maxLength="23"
+                android:paddingTop="15dp"
                 android:paddingBottom="8dp"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
 
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="20dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/txtrol"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 android:text="@string/txt_Rol"
+
                 android:textColor="#000000"
                 android:textSize="24sp"
-                android:textStyle="bold"
-
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="20dp"/>
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spirol"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
+
+
                 android:entries="@array/Rol"
+                android:textAlignment="center"
                 android:textColor="#219EBC"
                 android:textSize="50sp"
-
-
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:textAlignment="center"
-                app:cornerRadius="10dp"/>
+                app:cornerRadius="10dp" />
 
 
         </LinearLayout>
@@ -228,9 +224,9 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="20dp"
 
             android:backgroundTint="#005F73"
             android:onClick="onClick"
@@ -251,16 +247,15 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="40dp"
-            android:textStyle="bold"
-
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:backgroundTint="#005F73"
+
             android:onClick="volverLogin"
             android:text="@string/btn_Cancelar"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:cornerRadius="10dp" />
 
 

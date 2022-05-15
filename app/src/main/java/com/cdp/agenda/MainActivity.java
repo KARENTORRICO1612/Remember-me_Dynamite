@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity  {
     String nameGetR,passwordGetR;
     ///fin
 
+    //para mostrar nombre del usuario en pantalla despues de logear
+    TextView nameuser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +92,8 @@ public class MainActivity extends AppCompatActivity  {
         //inicializar componentes
         spinner = findViewById(R.id.spinner);
         boton = (Button) findViewById(R.id.button2);
+        nameuser=findViewById(R.id.nameUser);
+        nameuser.setText(nameGetR);
         idverLista= (Button) findViewById(R.id.idverLista);
         //Acciones del boton
          idverLista.setOnClickListener(new View.OnClickListener() { //actualizar lista
@@ -150,12 +156,11 @@ public class MainActivity extends AppCompatActivity  {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this,"Realice una selección", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Adulto seleccionado", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 

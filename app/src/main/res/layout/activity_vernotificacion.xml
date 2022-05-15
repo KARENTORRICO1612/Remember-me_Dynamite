@@ -13,7 +13,7 @@
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ES HOY!!! ES HOY!!!"
+        android:text="Es hoy!!! Es hoy!!!"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -41,7 +41,7 @@
             <EditText
                 android:id="@+id/txtTitulo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="#FFFCFC"
                 android:ems="10"
                 android:inputType="text"
@@ -73,7 +73,7 @@
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                tools:text="Hora:" />
+                android:text="Hora:" />
 
             <TextView
                 android:id="@+id/eHora"
@@ -98,7 +98,7 @@
                 android:layout_height="75dp"
                 android:background="#FFFFFF"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:labelFor="@+id/viewDireccion"
                 android:maxLength="50"
                 android:textSize="20sp" />
@@ -118,7 +118,7 @@
                 android:layout_height="72dp"
                 android:background="#FFFFFF"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:labelFor="@+id/viewDescripcion"
                 android:maxLength="70"
                 android:textSize="20sp" />

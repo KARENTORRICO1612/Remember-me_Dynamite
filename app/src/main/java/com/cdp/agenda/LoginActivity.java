@@ -56,8 +56,8 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void validarDatos(View view){
 
-        usuario=user.getEditText().getText().toString().trim();
-        contra=contrasenia.getEditText().getText().toString().trim();
+        usuario=user.getEditText().getText().toString();//cambio para bug 16 y 17
+        contra=contrasenia.getEditText().getText().toString();//cambio para bug 16 y 17
 
 
         String r = String.valueOf(spiRol.getSelectedItem());
@@ -137,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Usuario, contraseña o rol incorrectos",Toast.LENGTH_SHORT).show();
                     }
                 }
         );

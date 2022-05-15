@@ -6,8 +6,10 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -84,6 +86,15 @@ public class EditarActivity extends AppCompatActivity {
         aHora.setOnClickListener(this::onClick);
         aFecha.setOnClickListener(this::onClick);
 
+        //para bug 11 y 12
+        aHora.setBackgroundColor(Color.parseColor("#005F73"));
+        aHora.setTextColor(Color.parseColor("#ffffff"));
+        aFecha.setBackgroundColor(Color.parseColor("#005F73"));
+        aFecha.setTextColor(Color.parseColor("#ffffff"));
+        aHora.setGravity(Gravity.CENTER_HORIZONTAL);
+        aFecha.setGravity(Gravity.CENTER_HORIZONTAL);
+        //fin bug fix
+
 
         txtTitulo = findViewById(R.id.txtTitulo);
         txtDireccion = findViewById(R.id.txtDireccion);
@@ -123,7 +134,7 @@ public class EditarActivity extends AppCompatActivity {
         btnGuarda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!txtTitulo.getText().toString().equals("") && !eHora.getText().toString().equals("") &&
+                if (!txtTitulo.getText().toString().trim().isEmpty() && !eHora.getText().toString().equals("") &&
                         !eFecha.getText().toString().equals("")) {
 
                     titulo=txtTitulo.getText().toString().trim();
@@ -214,7 +225,10 @@ public class EditarActivity extends AppCompatActivity {
                             }else Toast.makeText(EditarActivity.this, "NO SE PUEDEN REGISTRAR FECHAS ANTERIORES", Toast.LENGTH_LONG).show();
                         }
                     }
-
+                    //para bug 9 horas pasadas
+                    GESTION = year;
+                    MES = monthOfYear;
+                    DIA = dayOfMonth;
                 }
             }, 2022, mes, dia);
 
@@ -223,19 +237,57 @@ public class EditarActivity extends AppCompatActivity {
         }
         if (v == aHora) {
             final Calendar c = Calendar.getInstance();
-            int hora = c.get(Calendar.HOUR_OF_DAY);
-            int minutos = c.get(Calendar.MINUTE);
+            int horaActual = c.get(Calendar.HOUR_OF_DAY);
+            int minutosActual = c.get(Calendar.MINUTE);
+
+            //para bug 9 dias pasados
+            int diaActual = c.get(Calendar.DAY_OF_MONTH);
+            int mesActual = c.get(Calendar.MONTH);
+            int anioActual = c.get(Calendar.YEAR);
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    eHora.setText(String.format("%02d:%02d", hourOfDay, minute));
 
-                    HORA = hourOfDay;
-                    MINUTO = minute;
+
+                    String finalHour, finalMinute; //notificaciones
+                    if(diaActual==DIA && mesActual==MES && anioActual==GESTION ){
+                        if(horaActual==hourOfDay){
+                            if(minutosActual<minute){
+                                eHora.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                                finalHour = "" + hourOfDay;//notificaciones
+                                finalMinute = "" + minute; //notificaciones
+                                if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
+                                if(minute < 10) finalMinute = "0" + minute; //notificaciones
+                            }else{
+                                Toast.makeText(EditarActivity.this, "NO SE PUEDEN REGISTRAR HORAS PASADAS", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }else if(horaActual<hourOfDay){
+                            eHora.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                            finalHour = "" + hourOfDay;//notificaciones
+                            finalMinute = "" + minute; //notificaciones
+                            if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
+                            if(minute < 10) finalMinute = "0" + minute; //notificaciones
+                        }else{
+                            Toast.makeText(EditarActivity.this, "NO SE PUEDEN REGISTRAR HORAS PASADAS", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else{
+                        eHora.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                        finalHour = "" + hourOfDay;//notificaciones
+                        finalMinute = "" + minute; //notificaciones
+                        if(hourOfDay < 10) finalHour = "0" + hourOfDay; //notificaciones
+                        if(minute < 10) finalMinute = "0" + minute; //notificaciones
+                    }
                 }
-            }, hora, minutos, false);
+            }, horaActual, minutosActual, false);
             timePickerDialog.show();
+
         }
     }
 

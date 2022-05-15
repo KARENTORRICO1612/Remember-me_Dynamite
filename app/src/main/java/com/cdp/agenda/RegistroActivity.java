@@ -1,8 +1,10 @@
 package com.cdp.agenda;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -31,7 +33,7 @@ import java.util.Map;
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText iNombre, iContra, iConfiContra;
-    Button btnRegistrar;
+    Button btnRegistrar,btnCancelar;
     CheckBox cbMostrarConta, cbMostrarConfiContra;
 
     Spinner spiRol;
@@ -61,6 +63,29 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         spiRol = findViewById(R.id.spirol);
 
         btnRegistrar = findViewById(R.id.btnregistrar);
+        btnCancelar=findViewById(R.id.btncancelar);
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegistroActivity.this);
+                builder.setMessage("¿Desea salir de registro?")
+                        .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent= new Intent(RegistroActivity.this,LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).show();
+            }
+        });
     }
 
     @Override
