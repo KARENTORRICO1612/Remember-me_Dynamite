@@ -201,9 +201,19 @@ public class MainActivity extends AppCompatActivity  {
                 cerrarSR();
                 return true;
 
+            case R.id.idAsociarAdulto:
+                asociarAdulto();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void asociarAdulto(){
+        Intent intent=new Intent(MainActivity.this,asociarAdultoActivity.class);
+        intent.putExtra("nombreResp",nameGetR);
+        startActivity(intent);
     }
     public void cerrarSR(){
 

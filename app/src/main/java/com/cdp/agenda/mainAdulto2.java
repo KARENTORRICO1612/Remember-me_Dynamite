@@ -165,11 +165,25 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
             case R.id.idCerrar:
                 cerrarS();
                 return true;
+            case R.id.idCrearClave:
+                crearClave();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+    public void crearClave(){
+        Intent intent=new Intent(mainAdulto2.this,crearClaveActivity.class);
+        intent.putExtra("nombreDeUsuario",nameGetA);
+        startActivity(intent);
+    }
+    public void asociarAdulto(){
+        Intent intent=new Intent(mainAdulto2.this,asociarAdultoActivity.class);
+        startActivity(intent);
+    }
+
+
     public void cerrarS(){
 
         //para insertar datos

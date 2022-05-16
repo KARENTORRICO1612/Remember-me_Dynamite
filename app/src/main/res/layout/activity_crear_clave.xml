@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".crearClaveActivity">
+
+    <LinearLayout
+        android:layout_width="420dp"
+        android:layout_height="737dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <TextView
+            android:id="@+id/txtTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Clave de Conexión"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="29dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="318dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtContraseña"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Clave:" />
+
+                <EditText
+                    android:id="@+id/txtClave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/txwConfirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Confirmar" />
+
+                <EditText
+                    android:id="@+id/txtConfirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="77dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="42dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"></LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="205dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btnGuardarpopup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Guardar" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp" />
+
+                        <Button
+                            android:id="@+id/btnGenerar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Generar" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp" />
+
+                        <Button
+                            android:id="@+id/btnReiniciar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Reiniciar" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
