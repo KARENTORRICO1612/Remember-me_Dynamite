@@ -4,6 +4,9 @@
 
 
     <item
+        android:id="@+id/item"
+        android:title="Item" />
+    <item
         android:id="@+id/idCerrar"
         android:title="Cerrar Sesión" />
 </menu>

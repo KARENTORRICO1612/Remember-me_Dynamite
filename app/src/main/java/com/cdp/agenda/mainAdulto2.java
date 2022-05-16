@@ -153,11 +153,17 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         switch (item.getItemId()){
             case R.id.idCerrar:
                 cerrarS();
+            case R.id.item:
+                abrirPupUp();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void abrirPupUp(){
+        Intent intent = new Intent(mainAdulto2.this,crearClaveActivity.class);
+        startActivity(intent);
     }
     public void cerrarS(){
 
