@@ -1,11 +1,16 @@
 package com.cdp.agenda;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
@@ -36,10 +41,15 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sp;
     //No tocar
 
+    int REQUEST_CODE = 200;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        verificarPermisos();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//para bloquear el giro de pantalla
         verificarSesion();
 
@@ -49,6 +59,19 @@ public class LoginActivity extends AppCompatActivity {
         spiRol = findViewById(R.id.spirol);
 
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void verificarPermisos(){
+        int PermisosUbicacion = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (PermisosUbicacion == PackageManager.PERMISSION_GRANTED){
+            //MetodoMandar Mensajes
+            Toast.makeText(this, "Permiso de ubicación habilitado", Toast.LENGTH_SHORT).show();
+        }else{
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        }
+    }
+
     public void registrar(View view){
         Intent intent= new Intent(LoginActivity.this,RegistroActivity.class);
         startActivity(intent);
