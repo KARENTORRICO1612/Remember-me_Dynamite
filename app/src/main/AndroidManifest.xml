@@ -7,8 +7,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    //lo siguiente son permisos para las notificaciones
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -17,8 +15,7 @@
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.VIBRATE" /> <!-- MAKE ALARMS RESTART ON REBOOT -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    //hasta aqui los permisos para notificaciones
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -27,39 +24,53 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCYmA1T9T2zui92-3c84wdP8tZ-ftyh2pg" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false"
+            android:label="MapsActivity" />
         <activity
             android:name=".mainAdulto2"
             android:exported="false" />
         <activity
-
             android:name=".loginPrueba"
             android:exported="false" />
         <activity
             android:name=".programareventodeAdultoMayor"
             android:exported="false" />
-
         <activity
-
             android:name=".vernotificacion"
             android:exported="false" />
         <activity
-
             android:name=".NuevoActivity"
-            android:parentActivityName=".mainAdulto2"/>
-
+            android:parentActivityName=".mainAdulto2" />
         <activity
             android:name=".LoginActivity"
-            android:parentActivityName=".MainActivity"/>
-
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".RegistroActivity"
             android:parentActivityName=".MainActivity">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".pantalla"
+        <activity
+            android:name=".pantalla"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -74,8 +85,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
-
         <activity
             android:name=".EditarActivity"
             android:parentActivityName=".MainActivity">
@@ -83,32 +92,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
-        <activity android:name=".MainActivity"></activity>
-
-
-
+        <activity android:name=".MainActivity" />
 
         <receiver
-            android:name="com.cdp.agenda.AlarmReceiver"
+            android:name=".AlarmReceiver"
             android:enabled="true" />
 
         <service
-            android:name="com.cdp.agenda.NotificationService"
+            android:name=".NotificationService"
             android:enabled="true" /> <!-- MAKE ALARMS RESTART ON REBOOT -->
-
         <service android:name=".RebootServiceClass" />
 
-        <receiver android:name=".MyRebootReceiver"
+        <receiver
+            android:name=".MyRebootReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-
     </application>
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 </manifest>

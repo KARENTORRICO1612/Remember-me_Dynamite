@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity  {
     private Spinner spinner;
     private Button boton;
     private Button button;
-    private Button idverLista;
+    private Button idverLista,verubicacion;
     private RequestQueue requestQueue;
     private ArrayList<String> listAdultos;
     private boolean actualizado;
@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity  {
         nameuser=findViewById(R.id.nameUser);
         nameuser.setText(nameGetR);
         idverLista= (Button) findViewById(R.id.idverLista);
+        verubicacion=findViewById(R.id.btnVerUbic);
         //Acciones del boton
          idverLista.setOnClickListener(new View.OnClickListener() { //actualizar lista
             @Override
@@ -132,6 +133,19 @@ public class MainActivity extends AppCompatActivity  {
                     if(actualizado) {
                         nomAdulto = spinner.getSelectedItem().toString();
                         Intent i = new Intent(MainActivity.this, programareventodeAdultoMayor.class);
+                        i.putExtra("usuarioLogin", nomAdulto);
+                        startActivity(i);
+                    }else{
+                        Toast.makeText(MainActivity.this, "Seleccione un Adulto", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+            verubicacion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(actualizado) {
+                        nomAdulto = spinner.getSelectedItem().toString();
+                        Intent i = new Intent(MainActivity.this, MapsActivity.class);
                         i.putExtra("usuarioLogin", nomAdulto);
                         startActivity(i);
                     }else{

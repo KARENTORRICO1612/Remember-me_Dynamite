@@ -24,8 +24,8 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="268dp"
-        android:layout_height="41dp"
+        android:layout_width="259dp"
+        android:layout_height="38dp"
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="248dp"
@@ -36,34 +36,52 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="120dp"
+        android:layout_width="317dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="88dp"
         android:background="#005F73"
         android:text="Programar Actividad"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVerUbic" />
+
+    <Button
+        android:id="@+id/btnVerUbic"
+        android:layout_width="278dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="148dp"
+        android:background="#005F73"
+        android:text="ver ubicación"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/idverLista"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="13dp"
+        android:layout_width="315dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
         android:background="#005F73"
         android:text="VER ACTIVIDADES PROGRAMADAS"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
@@ -81,12 +99,12 @@
         android:id="@+id/nameUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idverLista" />
 
