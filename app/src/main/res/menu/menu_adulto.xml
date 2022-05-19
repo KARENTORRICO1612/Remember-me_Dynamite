@@ -4,12 +4,13 @@
 
 
     <item
-        android:id="@+id/idCrearClave"
+        android:id="@+id/crearClave"
         android:title="Clave de conexión" />
     <item
-        android:id="@+id/idAsociarAdulto"
-        android:title="Asociar Adulto" />
+        android:id="@+id/ayudaA"
+        android:title="Ayuda" />
+
     <item
-        android:id="@+id/idCerrar"
+        android:id="@+id/cerrarA"
         android:title="Cerrar Sesión" />
 </menu>

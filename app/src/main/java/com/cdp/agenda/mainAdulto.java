@@ -5,14 +5,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.cdp.agenda.adaptadores.ListaContactosAdapter;
 import com.cdp.agenda.db.DbContactos;
@@ -64,7 +58,7 @@ public class mainAdulto extends AppCompatActivity implements SearchView.OnQueryT
 
         public boolean onCreateOptionsMenu(Menu menu){
                 MenuInflater inflater = getMenuInflater();
-                inflater.inflate(R.menu.menu_principal, menu);
+                inflater.inflate(R.menu.menu_adulto, menu);
                 return true;
         }
 

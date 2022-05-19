@@ -27,7 +27,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cdp.agenda.adaptadores.ListaContactosAdapter;
-import com.cdp.agenda.db.DbContactos;
 import com.cdp.agenda.entidades.Contactos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -191,18 +190,26 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
 
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_principal, menu);
+        if(tipoDeUsuario.equals("responsable")){
+            //no mostramos ningun menu
+        }else{
+            inflater.inflate(R.menu.menu_adulto, menu);
+        }
+
         return true;
     }
 
      public boolean onOptionsItemSelected(MenuItem item){
        //evaluar para que nos traiga el id del elemento del menu selecionado
         switch (item.getItemId()){
-            case R.id.idCerrar:
+            //para adulto
+            case R.id.cerrarA:
                 cerrarS();
                 return true;
-            case R.id.idCrearClave:
+            case R.id.crearClave:
                 crearClave();
+                return true;
+            case R.id.ayudaA:
                 return true;
 
             default:

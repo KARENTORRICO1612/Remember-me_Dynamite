@@ -198,12 +198,14 @@ public class MainActivity extends AppCompatActivity  {
     public boolean onOptionsItemSelected(MenuItem item){
         //evaluar para que nos traiga el id del elemento del menu selecionado
         switch (item.getItemId()){
-            case R.id.idCerrar:
+            case R.id.cerrarR:
                 cerrarSR();
                 return true;
 
-            case R.id.idAsociarAdulto:
+            case R.id.asociarAdulto:
                 asociarAdulto();
+                return true;
+            case R.id.ayudaR:
                 return true;
 
             default:
