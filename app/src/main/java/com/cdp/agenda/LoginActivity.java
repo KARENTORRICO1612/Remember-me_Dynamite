@@ -1,17 +1,22 @@
 package com.cdp.agenda;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -41,18 +46,33 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sp;
     //No tocar
 
-    int REQUEST_CODE = 200;
+    //int REQUEST_CODE = 200;
+    private static final int REQUEST_PERMISSION_LOCATION = 100;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    //@RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        verificarPermisos();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//para bloquear el giro de pantalla
-        verificarSesion();
 
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            verificarSesion();
+        }else{
+            Log.i("TAG", "API >= 23");
+            if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                Log.i("TAG", "Permission granted");
+                verificarSesion();
+            }else{
+                if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)){
+                    Log.i("TAG", "the user previously rejected the request");
+                }else{
+                    Log.i("TAG", "Request permission");
+                }
+                ActivityCompat.requestPermissions(LoginActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_PERMISSION_LOCATION);
+            }
+        }
         requestQueue= Volley.newRequestQueue(this);
         user=(TextInputLayout) findViewById(R.id.usuario);
         contrasenia=(TextInputLayout) findViewById(R.id.contrasenia);
@@ -60,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    /*@RequiresApi(api = Build.VERSION_CODES.M)
     public void verificarPermisos(){
         int PermisosUbicacion = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
@@ -70,6 +90,39 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         }
+    }*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_PERMISSION_LOCATION){
+            if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Log.i("TAG", "Permission granted(request)");
+                //
+                verificarSesion();
+            }else{
+                Log.i("TAG", "Permission denied(request)");
+                if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this,Manifest.permission.ACCESS_FINE_LOCATION)){
+                    new AlertDialog.Builder(this).setMessage("You need to enable permission to use this app")
+                            .setPositiveButton("try again", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    ActivityCompat.requestPermissions(LoginActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_PERMISSION_LOCATION);
+                                }
+                            })
+                            .setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //salir
+                                    Log.i("TAG", "Leave?");
+                                }
+                            }).show();
+                }else{
+                    Toast.makeText(this,"You need to able permission manually", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public void registrar(View view){
@@ -77,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    //@RequiresApi(api = Build.VERSION_CODES.M)
     public void validarDatos(View view){
 
         usuario=user.getEditText().getText().toString();//cambio para bug 16 y 17
@@ -87,10 +141,10 @@ public class LoginActivity extends AppCompatActivity {
         if(!user.getEditText().getText().toString().equals("") && !contrasenia.getEditText().getText().toString().equals("")){
 
             if(r.equals("Adulto")){
+                //verificarPermisos();
                 URL = "https://bdconandroidstudio.000webhostapp.com/verificarUserAdulto.php?nombre_a="+usuario+"&contrasenia="+contra;
 
                     verificarLogin(URL,contra,"adulto");
-
 
             }
             if(r.equals("Responsable")){
