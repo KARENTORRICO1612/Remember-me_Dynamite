@@ -288,4 +288,13 @@ public class NuevoActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(actividad, mainAdulto2.class);
+        intent.putExtra("usuarioLogin",nomAdulto);
+        intent.putExtra("tipoDeUsuario","adulto");
+        startActivity(intent);
+        finish();
+    }
 }

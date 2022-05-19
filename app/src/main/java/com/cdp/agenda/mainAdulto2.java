@@ -1,15 +1,22 @@
 package com.cdp.agenda;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,6 +35,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cdp.agenda.adaptadores.ListaContactosAdapter;
 import com.cdp.agenda.entidades.Contactos;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -46,7 +57,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
     FloatingActionButton fabNuevo;
     ListaContactosAdapter adapter;
     RequestQueue requestQueue;
-    String tipoDeUsuario;
+    String tipoDeUsuario="adulto";
     //para recibir los valores de login
     Bundle getUserA,getContraA,getTU;
     //para guardar los valores recibidos de login
@@ -59,6 +70,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
 
     //para mostrar nombre del usuario en pantalla
     TextView nameuser2;
+    public static final int REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +105,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
             nameuser2.setText("");
         }else{
             nameuser2.setText(nameGetA);
+            ObtenerCoordendasActual();
         }
         //
         //DbContactos dbContactos = new DbContactos(mainAdulto2.this);
@@ -161,8 +174,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Guardado", Toast.LENGTH_SHORT).show();
-                //poner aqui lo que se quierer ejecutar despues de esta consulta
+                Toast.makeText(getApplicationContext(), "Ubicación Guardada", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -263,5 +275,63 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
+    }
+
+    public void ObtenerCoordendasActual() {
+
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(mainAdulto2.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+        } else {
+
+            getCoordenada();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getCoordenada();
+            } else {
+                Toast.makeText(this, "Permiso Denegado ..", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void getCoordenada() {
+
+        try {
+            LocationRequest locationRequest = new LocationRequest();
+            locationRequest.setInterval(10000);
+            locationRequest.setFastestInterval(3000);
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                return;
+            }
+            LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, new LocationCallback() {
+                @SuppressLint("MissingPermission")
+                @Override
+                public void onLocationResult(LocationResult locationResult) {
+                    super.onLocationResult(locationResult);
+                    LocationServices.getFusedLocationProviderClient(mainAdulto2.this).removeLocationUpdates(this);
+                    if (locationResult != null && locationResult.getLocations().size() > 0) {
+                        int latestLocationIndex = locationResult.getLocations().size() - 1;
+                        double latitud = locationResult.getLocations().get(latestLocationIndex).getLatitude();
+                        double longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
+
+                        insertarUbicacion(nameGetA,""+latitud,""+longitude);
+                    }
+
+                }
+
+            }, Looper.myLooper());
+
+        }catch (Exception ex){
+            System.out.println("Error es :" + ex);
+        }
     }
 }
