@@ -1,19 +1,23 @@
 package com.cdp.agenda;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +28,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cdp.agenda.adaptadores.ListaContactosAdapter;
@@ -202,12 +207,48 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
                 cerrarS();
                 return true;
             case R.id.idCrearClave:
-                crearClave();
+                clave();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void clave(){
+        Toast.makeText(getApplicationContext(), "Buscando...", Toast.LENGTH_SHORT).show();
+        String URL = "https://bdconandroidstudio.000webhostapp.com/verSoloNomAdulJson.php?nombre_a="+nameGetA;
+        String clave="";
+        JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        String claveConexion="";
+                        try {
+                            claveConexion= response.getString("clave_con");
+                            if(claveConexion.length()>=8){
+                                dialogoCrearClave(claveConexion);
+                            }else{
+                               crearClave();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            //Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
+
     }
     public void crearClave(){
         Intent intent=new Intent(mainAdulto2.this,crearClaveActivity.class);
@@ -219,7 +260,27 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         startActivity(intent);
     }
 
+    public void dialogoCrearClave(String clave){
+        AlertDialog.Builder builder= new AlertDialog.Builder(mainAdulto2.this);
+        builder.setTitle("Clave de Conexión");
+        builder.setMessage("Clave Actual: "+clave)
+                .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        crearClave();
 
+                    }
+                })
+                .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getApplicationContext(),"No pasa nada",Toast.LENGTH_SHORT).show();
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
     public void cerrarS(){
 
         //para insertar datos

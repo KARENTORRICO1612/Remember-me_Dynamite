@@ -90,7 +90,7 @@ public class crearClaveActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> parametros=new HashMap<String,String>();
                 parametros.put("nombre_a",nomU);
-                parametros.put("clave_con",clave);
+                parametros.put("clave_con",c);
                 return parametros;
             }
         };
