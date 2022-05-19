@@ -1,5 +1,6 @@
 package com.cdp.agenda;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +18,13 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cdp.agenda.adaptadores.ListaContactosAdapter;
 import com.cdp.agenda.db.DbContactos;
@@ -33,6 +37,8 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQueryTextListener, Serializable {
     SearchView txtBuscar;
@@ -95,6 +101,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         //adapter = new ListaContactosAdapter(dbContactos.mostrarContactos());
         //listaContactos.setAdapter(adapter);
         enListarRecordatorios(nameGetA);
+       // insertarUbicacion(nameGetA,156+"",784+"");
 
         fabNuevo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +154,35 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         requestQueue.add(jsonArrayRequest);
 
 
+
+    }
+
+    public void insertarUbicacion(String nomAdulto,String latitud,String longitud){
+        String URL="https://bdconandroidstudio.000webhostapp.com/insertarUbicacion.php";
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), "Guardado", Toast.LENGTH_SHORT).show();
+                //poner aqui lo que se quierer ejecutar despues de esta consulta
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros=new HashMap<String,String>();
+                parametros.put("nombre_a",nomAdulto);
+                parametros.put("latitud",latitud);
+                parametros.put("longitud",longitud);
+                return parametros;
+            }
+        };
+
+        requestQueue.add(stringRequest);
 
     }
 

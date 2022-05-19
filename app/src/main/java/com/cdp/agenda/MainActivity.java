@@ -190,9 +190,10 @@ public class MainActivity extends AppCompatActivity  {
 
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_principal, menu);
+        inflater.inflate(R.menu.menu_resp, menu);
         return true;
     }
+
 
     public boolean onOptionsItemSelected(MenuItem item){
         //evaluar para que nos traiga el id del elemento del menu selecionado

@@ -86,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void verificarLogin(String URL,String contra,String rol){
         // Toast.makeText(getApplicationContext(), "se hizo la consulta", Toast.LENGTH_SHORT).show();
-
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(
                 Request.Method.GET,
                 URL,
