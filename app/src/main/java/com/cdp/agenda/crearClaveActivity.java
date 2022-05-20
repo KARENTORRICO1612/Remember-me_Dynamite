@@ -1,15 +1,14 @@
 package com.cdp.agenda;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.jetbrains.annotations.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,8 +19,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cdp.agenda.adaptadores.ListaContactosAdapter;
-import com.cdp.agenda.entidades.Contactos;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,6 +78,9 @@ public class crearClaveActivity extends AppCompatActivity {
         }
         modificarClaveUsuario(clave,nomDeUsuario);
     }
+
+
+
     public void verificarCondiciones(){
 
     }
