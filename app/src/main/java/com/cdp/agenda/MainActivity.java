@@ -147,6 +147,9 @@ public class MainActivity extends AppCompatActivity  {
                 @Override
                 public void onClick(View v) {
                     getUbicacion(spinner.getSelectedItem().toString());
+                    /*Intent intent= new Intent(MainActivity.this,MapsActivity.class);
+                    intent.putExtra("nameA",spinner.getSelectedItem().toString());
+                    startActivity(intent);*/
                 }
             });
     }

@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -71,6 +72,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
     //para mostrar nombre del usuario en pantalla
     TextView nameuser2;
     public static final int REQUEST_CODE = 1;
+    private boolean salio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         listaContactos = findViewById(R.id.listaContactos);
         fabNuevo = findViewById(R.id.favNuevo);
         nameuser2=findViewById(R.id.nameUs);
+        salio=false;
         listaContactos.setLayoutManager(new LinearLayoutManager(this));
 
           if(getIntent().getExtras()!=null) {
@@ -174,7 +177,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Ubicación Guardada", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Ubicación Guardada", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -247,7 +250,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         spe.putString("pass","null");
         spe.putString("rol","null");
         spe.commit();
-
+        salio=true;
         Intent intent=new Intent(mainAdulto2.this,LoginActivity.class);
         startActivity(intent);
         finish();
@@ -324,6 +327,10 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
                         double longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
 
                         insertarUbicacion(nameGetA,""+latitud,""+longitude);
+                        if(salio==false){
+                            countDownTimer();
+                        }
+
                     }
 
                 }
@@ -333,5 +340,20 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         }catch (Exception ex){
             System.out.println("Error es :" + ex);
         }
+    }
+
+    private void countDownTimer() {
+        new CountDownTimer(15000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                // Toast.makeText(MapsActivity.this, "Faltan "+millisUntilFinished/1000+" segundos", Toast.LENGTH_SHORT).show();
+
+            }
+
+            public void onFinish() {
+                ObtenerCoordendasActual();
+                Toast.makeText(mainAdulto2.this, "Ubicación actualizada", Toast.LENGTH_SHORT).show();
+            }
+        }.start();
     }
 }
