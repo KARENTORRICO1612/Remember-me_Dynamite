@@ -1,8 +1,13 @@
 package com.cdp.agenda;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager; //notificaciones
 import android.app.DatePickerDialog;
@@ -11,7 +16,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,6 +35,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cdp.agenda.db.DbContactos;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -37,7 +48,7 @@ public class NuevoActivity extends AppCompatActivity {
 
     EditText txtTitulo, txtDireccion, txtDescripcion;
     TextView eHora,eFecha;
-    Button btnGuarda, btnBorrar, bFecha, bHora;
+    Button btnGuarda, btnBorrar, bFecha, bHora,fijarDirec;
     Activity actividad;
 
     private String titulo,time,fecha,direccion,descripcion;
@@ -49,6 +60,7 @@ public class NuevoActivity extends AppCompatActivity {
     private SharedPreferences settings; //notificaciones
 
     private int HORA, MINUTO, DIA, MES, GESTION;
+    public static final int REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +85,7 @@ public class NuevoActivity extends AppCompatActivity {
         txtDescripcion = findViewById(R.id.txtDescripcion);
         btnGuarda = findViewById(R.id.btnGuarda);
         btnBorrar = findViewById(R.id.btnBorrar);
+        fijarDirec=findViewById(R.id.btndireccionfijar);
         actividad=this;
         btnGuarda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +143,12 @@ public class NuevoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 limpiar();
+            }
+        });
+        fijarDirec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ObtenerCoordendasActual();
             }
         });
     }
@@ -296,5 +315,66 @@ public class NuevoActivity extends AppCompatActivity {
         intent.putExtra("tipoDeUsuario","adulto");
         startActivity(intent);
         finish();
+    }
+
+    public void ObtenerCoordendasActual() {
+
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(NuevoActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+        } else {
+
+            getCoordenada();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getCoordenada();
+            } else {
+                Toast.makeText(this, "Permiso Denegado ..", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void getCoordenada() {
+
+        try {
+            LocationRequest locationRequest = new LocationRequest();
+            locationRequest.setInterval(10000);
+            locationRequest.setFastestInterval(3000);
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                return;
+            }
+            LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, new LocationCallback() {
+                @SuppressLint("MissingPermission")
+                @Override
+                public void onLocationResult(LocationResult locationResult) {
+                    super.onLocationResult(locationResult);
+                    LocationServices.getFusedLocationProviderClient(NuevoActivity.this).removeLocationUpdates(this);
+                    if (locationResult != null && locationResult.getLocations().size() > 0) {
+                        int latestLocationIndex = locationResult.getLocations().size() - 1;
+                        double latitud = locationResult.getLocations().get(latestLocationIndex).getLatitude();
+                        double longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
+                        Intent intent= new Intent(NuevoActivity.this,MapsActivity2.class);
+                        intent.putExtra("latitud",latitud);
+                        intent.putExtra("longitud",longitude);
+                        startActivity(intent);
+
+                    }
+
+                }
+
+            }, Looper.myLooper());
+
+        }catch (Exception ex){
+            System.out.println("Error es :" + ex);
+        }
     }
 }

@@ -253,6 +253,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         salio=true;
         Intent intent=new Intent(mainAdulto2.this,LoginActivity.class);
         startActivity(intent);
+        salio=true;
         finish();
 
     }
@@ -343,17 +344,20 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
     }
 
     private void countDownTimer() {
-        new CountDownTimer(15000, 1000) {
+        if(salio==false){
+            new CountDownTimer(15000, 1000) {
 
-            public void onTick(long millisUntilFinished) {
-                // Toast.makeText(MapsActivity.this, "Faltan "+millisUntilFinished/1000+" segundos", Toast.LENGTH_SHORT).show();
+                public void onTick(long millisUntilFinished) {
+                    // Toast.makeText(MapsActivity.this, "Faltan "+millisUntilFinished/1000+" segundos", Toast.LENGTH_SHORT).show();
 
-            }
+                }
 
-            public void onFinish() {
-                ObtenerCoordendasActual();
-                Toast.makeText(mainAdulto2.this, "Ubicación actualizada", Toast.LENGTH_SHORT).show();
-            }
-        }.start();
+                public void onFinish() {
+                    ObtenerCoordendasActual();
+                    Toast.makeText(mainAdulto2.this, "Ubicación actualizada", Toast.LENGTH_SHORT).show();
+                }
+            }.start();
+        }
+
     }
 }
