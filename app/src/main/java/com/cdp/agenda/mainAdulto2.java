@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -57,6 +58,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
     Bundle getUserA,getContraA,getTU;
     //para guardar los valores recibidos de login
     String nameGetA,passwordGetA;
+    String claveCnx;
     ///fin
 
     //para el control de sesion NO TOCAR
@@ -231,7 +233,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
                             if(claveConexion.length()>=8){
                                 dialogoMostrarClave(claveConexion);
                             }else{
-                               crearClave();
+                               crearClave(Boolean.FALSE,"");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -249,9 +251,11 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         requestQueue.add(jsonObjectRequest);
 
     }
-    public void crearClave(){
+    public void crearClave(Boolean teniaClave,String c){
         Intent intent=new Intent(mainAdulto2.this,crearClaveActivity.class);
         intent.putExtra("nombreDeUsuario",nameGetA);
+        intent.putExtra("claveConexion",c);
+        intent.putExtra("teniaClave",teniaClave);
         startActivity(intent);
     }
     public void asociarAdulto(){
@@ -263,18 +267,18 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         AlertDialog.Builder builder= new AlertDialog.Builder(mainAdulto2.this);
         builder.setTitle("Clave de Conexión");
         builder.setMessage("Clave Actual: "+clave)
-                .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                .setPositiveButton(Html.fromHtml("<font color='#005F73'>Editar</font>"), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        crearClave();
+                        crearClave(Boolean.TRUE,clave);
 
                     }
                 })
-                .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setNegativeButton(Html.fromHtml("<font color='#005F73'>Aceptar</font>"), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getApplicationContext(),"No pasa nada",Toast.LENGTH_SHORT).show();
-                        dialogInterface.dismiss();
+                       // Toast.makeText(getApplicationContext(),"No pasa nada",Toast.LENGTH_SHORT).show();
+                      //  dialogInterface.dismiss();
                     }
                 })
                 .setCancelable(false)

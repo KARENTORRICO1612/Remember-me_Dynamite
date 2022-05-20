@@ -170,7 +170,9 @@ public class VerActivity extends AppCompatActivity {
     }
     private void obtenerDatosEvento(String URL){
         // Toast.makeText(getApplicationContext(), "se hizo la consulta", Toast.LENGTH_SHORT).show();
+
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(
+
                 Request.Method.GET,
                 URL,
                 null,
@@ -205,6 +207,8 @@ public class VerActivity extends AppCompatActivity {
                 }
         );
         requestQueue.add(jsonObjectRequest);
+
+
     }
     public void eliminarEvento(){
         String URL ="https://bdconandroidstudio.000webhostapp.com/eliminarEvento.php";

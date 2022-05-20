@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFE8D6"
     tools:context=".asociarAdultoActivity">
 
     <LinearLayout
@@ -36,7 +37,10 @@
                     android:id="@+id/textView13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Adulto Mayor"
+                    android:background="@drawable/style_bordes_redondeados"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Adulto Mayor:"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
                 <Space
@@ -54,7 +58,10 @@
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Clave de Conexión"
+                    android:background="@drawable/style_bordes_redondeados"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Clave de Conexión:"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
                 <Space
@@ -75,8 +82,10 @@
                 <Button
                     android:id="@+id/btnAsociar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Asociar" />
+                    android:layout_height="33dp"
+                    android:background="@color/colorPrimary"
+                    android:text="Asociar"
+                    android:textColor="#FFFFFF" />
 
             </LinearLayout>
 
