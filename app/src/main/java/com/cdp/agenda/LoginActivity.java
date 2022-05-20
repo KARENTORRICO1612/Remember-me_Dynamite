@@ -1,12 +1,21 @@
 package com.cdp.agenda;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sp;
     //No tocar
 
+    private static final int REQUEST_PERMISSION_LOCATION = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +61,11 @@ public class LoginActivity extends AppCompatActivity {
         user=(TextInputLayout) findViewById(R.id.usuario);
         contrasenia=(TextInputLayout) findViewById(R.id.contrasenia);
         spiRol = findViewById(R.id.spirol);
+        solicitarPermisosUbicacion();
 
     }
+
+
     public void registrar(View view){
         Intent intent= new Intent(LoginActivity.this,RegistroActivity.class);
         startActivity(intent);
@@ -205,5 +219,57 @@ public class LoginActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void solicitarPermisosUbicacion(){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            verificarSesion();
+        }else{
+            Log.i("TAG", "API >= 23");
+            if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                Log.i("TAG", "Permission granted");
+                Toast.makeText(this, "Permiso de ubicacion habilitado", Toast.LENGTH_SHORT).show();
+
+            }else{
+                if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)){
+                    Log.i("TAG", "the user previously rejected the request");
+                }else{
+                    Log.i("TAG", "Request permission");
+                }
+                ActivityCompat.requestPermissions(LoginActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_PERMISSION_LOCATION);
+            }
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_PERMISSION_LOCATION){
+            if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Log.i("TAG", "Permission granted(request)");
+                //
+                Toast.makeText(this, "ubicación habilitada", Toast.LENGTH_SHORT).show();
+                verificarSesion();
+            }else{
+                Log.i("TAG", "Permission denied(request)");
+                if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this,Manifest.permission.ACCESS_FINE_LOCATION)){
+                    new AlertDialog.Builder(this).setMessage("Necesita habilitar el permiso para que la aplicacion funcione de manera correcta")
+                            .setPositiveButton("Intentar Nuevamente", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    ActivityCompat.requestPermissions(LoginActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_PERMISSION_LOCATION);
+                                }
+                            })
+                            .setNegativeButton("No gracias", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //salir
+                                    Log.i("TAG", "Leave?");
+                                }
+                            }).show();
+                }else{
+                    Toast.makeText(this,"Necesitas habilitar el permiso manualmente para que pueda ser ubicado", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
