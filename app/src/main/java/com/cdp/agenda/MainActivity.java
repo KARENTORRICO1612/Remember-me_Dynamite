@@ -219,11 +219,17 @@ public class MainActivity extends AppCompatActivity  {
                 asociarAdulto();
                 return true;
             case R.id.ayudaR:
+                tutorialR();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void tutorialR(){
+        Intent intent=new Intent(MainActivity.this,ayudaResponsable.class);
+        startActivity(intent);
+
     }
 
     public void asociarAdulto(){

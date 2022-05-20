@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">REMEMBER ME</string>
+    <string name="app_name">Remember Me</string>
     <string name="hint_titulo">Título:</string>
     <string name="hint_direccion">Dirección:</string>
     <string name="hint_descripcion">Descripción:</string>

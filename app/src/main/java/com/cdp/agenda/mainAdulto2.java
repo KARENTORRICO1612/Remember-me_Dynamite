@@ -225,11 +225,17 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
                 crearClave();
                 return true;
             case R.id.ayudaA:
+                tutorialA();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void tutorialA(){
+        Intent intent=new Intent(mainAdulto2.this,ayudaAdulto.class);
+        startActivity(intent);
+
     }
     public void crearClave(){
         Intent intent=new Intent(mainAdulto2.this,crearClaveActivity.class);

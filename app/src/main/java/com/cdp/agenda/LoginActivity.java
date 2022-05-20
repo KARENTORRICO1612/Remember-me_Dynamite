@@ -215,11 +215,17 @@ public class LoginActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.ayudaL:
+                tutorialU();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+    public void tutorialU(){
+        Intent intent=new Intent(LoginActivity.this,ayudaUsuario.class);
+        startActivity(intent);
+    }
+
     public void solicitarPermisosUbicacion(){
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             verificarSesion();
