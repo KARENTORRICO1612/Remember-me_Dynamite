@@ -229,13 +229,12 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
                         try {
                             claveConexion= response.getString("clave_con");
                             if(claveConexion.length()>=8){
-                                dialogoCrearClave(claveConexion);
+                                dialogoMostrarClave(claveConexion);
                             }else{
                                crearClave();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            //Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -260,7 +259,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         startActivity(intent);
     }
 
-    public void dialogoCrearClave(String clave){
+    public void dialogoMostrarClave(String clave){
         AlertDialog.Builder builder= new AlertDialog.Builder(mainAdulto2.this);
         builder.setTitle("Clave de Conexión");
         builder.setMessage("Clave Actual: "+clave)
