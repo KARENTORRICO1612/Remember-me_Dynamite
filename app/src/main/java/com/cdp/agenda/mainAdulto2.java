@@ -1,14 +1,23 @@
 package com.cdp.agenda;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -60,6 +69,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_adulto2);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//para bloquear el giro de pantalla
+
         requestQueue = Volley.newRequestQueue(this);
         sp = getSharedPreferences("PruebaLogin", Context.MODE_PRIVATE);
       //  tipoDeUsuario=getIntent().getStringExtra("tipoDeUsuario");
@@ -105,6 +115,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
 
         txtBuscar.setOnQueryTextListener(this);
     }
+
     public void enListarRecordatorios(String nomAdul) {  //muestra una lista con los contacts
         String URL = "https://bdconandroidstudio.000webhostapp.com/recordatoriosDeUnAdulto.php?adulto_r="+nomAdul;
         ArrayList<Contactos> lista = new ArrayList<>();

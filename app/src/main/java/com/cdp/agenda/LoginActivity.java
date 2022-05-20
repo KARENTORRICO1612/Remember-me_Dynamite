@@ -46,10 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sp;
     //No tocar
 
-    //int REQUEST_CODE = 200;
     private static final int REQUEST_PERMISSION_LOCATION = 100;
 
-    //@RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             Log.i("TAG", "API >= 23");
             if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                 Log.i("TAG", "Permission granted");
+                Toast.makeText(this, "Permiso de ubicacion habilitado", Toast.LENGTH_SHORT).show();
                 verificarSesion();
             }else{
                 if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)){
@@ -73,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(LoginActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_PERMISSION_LOCATION);
             }
         }
+
         requestQueue= Volley.newRequestQueue(this);
         user=(TextInputLayout) findViewById(R.id.usuario);
         contrasenia=(TextInputLayout) findViewById(R.id.contrasenia);
@@ -80,17 +80,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    /*@RequiresApi(api = Build.VERSION_CODES.M)
-    public void verificarPermisos(){
-        int PermisosUbicacion = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-
-        if (PermisosUbicacion == PackageManager.PERMISSION_GRANTED){
-            //MetodoMandar Mensajes
-            Toast.makeText(this, "Permiso de ubicación habilitado", Toast.LENGTH_SHORT).show();
-        }else{
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-        }
-    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -98,18 +87,19 @@ public class LoginActivity extends AppCompatActivity {
             if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Log.i("TAG", "Permission granted(request)");
                 //
+                Toast.makeText(this, "ubicación habilitada", Toast.LENGTH_SHORT).show();
                 verificarSesion();
             }else{
                 Log.i("TAG", "Permission denied(request)");
                 if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this,Manifest.permission.ACCESS_FINE_LOCATION)){
-                    new AlertDialog.Builder(this).setMessage("You need to enable permission to use this app")
-                            .setPositiveButton("try again", new DialogInterface.OnClickListener() {
+                    new AlertDialog.Builder(this).setMessage("Necesita habilitar el permiso para que la aplicacion funcione de manera correcta")
+                            .setPositiveButton("Intentar Nuevamente", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     ActivityCompat.requestPermissions(LoginActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_PERMISSION_LOCATION);
                                 }
                             })
-                            .setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
+                            .setNegativeButton("No gracias", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     //salir
@@ -117,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }).show();
                 }else{
-                    Toast.makeText(this,"You need to able permission manually", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,"Necesitas habilitar el permiso manualmente para que pueda ser ubicado", Toast.LENGTH_SHORT).show();
                 }
             }
         }
