@@ -17,10 +17,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cdp.agenda.adaptadores.ListaContactosAdapter;
 import com.cdp.agenda.db.DbContactos;
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity  {
     private Button boton;
     private Button button;
     private Button idverLista;
+    private Button verUbicacion;
     private RequestQueue requestQueue;
     private ArrayList<String> listAdultos;
     private boolean actualizado;
@@ -95,6 +98,7 @@ public class MainActivity extends AppCompatActivity  {
         nameuser=findViewById(R.id.nameUser);
         nameuser.setText(nameGetR);
         idverLista= (Button) findViewById(R.id.idverLista);
+        verUbicacion=findViewById(R.id.btnVerubic);
         //Acciones del boton
          idverLista.setOnClickListener(new View.OnClickListener() { //actualizar lista
             @Override
@@ -137,6 +141,12 @@ public class MainActivity extends AppCompatActivity  {
                     }else{
                         Toast.makeText(MainActivity.this, "Seleccione un Adulto", Toast.LENGTH_LONG).show();
                     }
+                }
+            });
+            verUbicacion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getUbicacion(spinner.getSelectedItem().toString());
                 }
             });
     }
@@ -263,6 +273,50 @@ public class MainActivity extends AppCompatActivity  {
         requestQueue.add(jsonArrayRequest);
     }
 
+    private void getUbicacion(String nameA){
+        // Toast.makeText(getApplicationContext(), "se hizo la consulta", Toast.LENGTH_SHORT).show();
 
+        JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(
+                Request.Method.GET,
+                "https://bdconandroidstudio.000webhostapp.com/verSoloNomAdulJson.php"+"?nombre_a="+nameA,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //Toast.makeText(getApplicationContext(), "se hizo la consulta", Toast.LENGTH_SHORT).show();
+                        String latitud;
+                        String longitud;
+                        try {
+                            latitud= response.getString("latitud").toString();
+                            longitud= response.getString("longitud").toString();
+                            Intent intent= new Intent(MainActivity.this,MapsActivity.class);
+                            intent.putExtra("latitud",latitud);
+                            intent.putExtra("longitud",longitud);
+                            intent.putExtra("nameA",nameA);
+                            startActivity(intent);
+
+
+                        } catch (JSONException e) {
+                            Toast.makeText(MainActivity.this, "Error al acceder a la Base de datos", Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        //cambio para bug 16 y 17
+                        Toast.makeText(getApplicationContext(),"Error al acceder a la Base de datos",Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+        );
+
+
+        requestQueue.add(jsonObjectRequest);
+
+    }
 
 }

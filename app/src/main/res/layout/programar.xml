@@ -55,6 +55,20 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:id="@+id/btnVerubic"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="184dp"
+        android:background="#005F73"
+        android:text="ver ubicación"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/idverLista"
         android:layout_width="0dp"
         android:layout_height="50dp"

@@ -28,5 +28,6 @@
         <item>Adulto</item>
         <item>Responsable</item>
     </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>
