@@ -44,13 +44,16 @@
 
         <activity
             android:name=".ayudaUsuario"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppThemeAyudas"/>
         <activity
             android:name=".ayudaResponsable"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppThemeAyudas"/>
         <activity
             android:name=".ayudaAdulto"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppThemeAyudas"/>
         <activity
             android:name=".MapsActivity2"
             android:exported="false"
