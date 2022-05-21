@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.cdp.agenda.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,21 +29,19 @@ import org.json.JSONObject;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-   // private ActivityMapsBinding binding;
+    private ActivityMapsBinding binding;
 
     private double latitud, longitud;
     private String getlat, getlong, name;
     private RequestQueue requestQueue;
     private boolean salio;
-    private float zoom;
-    //private ArrayList<Marker> miubic= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       // binding = ActivityMapsBinding.inflate(getLayoutInflater());
-       // setContentView(binding.getRoot());
+        binding = ActivityMapsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         requestQueue = Volley.newRequestQueue(this);
         getlat = getIntent().getExtras().getString("latitud");
@@ -51,7 +50,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         latitud = Double.parseDouble(getlat);
         longitud = Double.parseDouble(getlong);
         salio = false;
-        zoom = 18;
         //getUbicacion(name);
 
 
@@ -155,7 +153,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(latitud, longitud);
         mMap.addMarker(new MarkerOptions().position(sydney).title(name));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 17));
         mMap.getUiSettings().setZoomControlsEnabled(true);//para los botones de zoom
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling

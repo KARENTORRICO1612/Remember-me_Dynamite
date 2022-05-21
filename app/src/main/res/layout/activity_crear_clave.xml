@@ -9,19 +9,22 @@
     tools:context=".crearClaveActivity">
 
     <LinearLayout
-        android:layout_width="420dp"
-        android:layout_height="737dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/txtTitulo"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/style_bordes_redondeados"
             android:backgroundTint="@color/colorPrimary"
+            android:gravity="center"
             android:text="  Clave de Conexión"
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
@@ -32,107 +35,97 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtContraseA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_bordes_redondeados"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Clave:"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/txtClave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/txwConfirmar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_bordes_redondeados"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Confirmar:"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/txtConfirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="#000000" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="52dp" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="320dp"
-                android:layout_height="447dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtContraseña"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/style_bordes_redondeados"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:text="Clave:"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/txtClave"
+                <Button
+                    android:id="@+id/btnGuardarpopup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textColor="#000000" />
 
-                <TextView
-                    android:id="@+id/txwConfirmar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/style_bordes_redondeados"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="Confirmar:"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/txtConfirmar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textColor="#000000" />
+                    android:text="Guardar"
+                    android:textColor="#FFFFFF" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="77dp" />
+                    android:layout_height="37dp" />
 
-                <LinearLayout
-                    android:layout_width="308dp"
-                    android:layout_height="219dp"
-                    android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnGenerar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Generar"
+                    android:textColor="#FFFFFF" />
 
-                    <LinearLayout
-                        android:layout_width="49dp"
-                        android:layout_height="219dp"
-                        android:orientation="horizontal"></LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp" />
 
-                    <LinearLayout
-                        android:layout_width="204dp"
-                        android:layout_height="216dp"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:id="@+id/btnGuardarpopup"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-
-                            android:backgroundTint="@color/colorPrimary"
-                            android:text="Guardar"
-                            android:textColor="#FFFFFF" />
-
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="37dp" />
-
-                        <Button
-                            android:id="@+id/btnGenerar"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorPrimary"
-                            android:text="Generar"
-                            android:textColor="#FFFFFF" />
-
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="37dp" />
-
-                        <Button
-                            android:id="@+id/btnReiniciar"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorPrimary"
-                            android:text="Reiniciar"
-                            android:textColor="#FFFFFF" />
-
-                    </LinearLayout>
-                </LinearLayout>
+                <Button
+                    android:id="@+id/btnReiniciar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Reiniciar"
+                    android:textColor="#FFFFFF" />
 
             </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

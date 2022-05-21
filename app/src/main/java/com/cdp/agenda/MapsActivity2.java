@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.cdp.agenda.databinding.ActivityMaps2Binding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -16,7 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap2;
-   // private ActivityMaps2Binding binding;
+    private ActivityMaps2Binding binding;
     private double latitud, longitud;
     private String getlat, getlong, name;
 
@@ -24,8 +25,8 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       // binding = ActivityMaps2Binding.inflate(getLayoutInflater());
-       // setContentView(binding.getRoot());
+        binding = ActivityMaps2Binding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         latitud = getIntent().getExtras().getDouble("latitud");
         longitud = getIntent().getExtras().getDouble("longitud");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -50,7 +51,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(latitud,longitud);
         //mMap2.addMarker(new MarkerOptions().position(sydney).title("Tu ubicacíon"));
-        mMap2.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18));
+        mMap2.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 17));
         mMap2.getUiSettings().setZoomControlsEnabled(true);//para los botones de zoom
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling

@@ -113,7 +113,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
             nameuser2.setText("");
         }else{
             nameuser2.setText(nameGetA);
-            ObtenerCoordendasActual();
+            countDownTimer();
         }
         //
         //DbContactos dbContactos = new DbContactos(mainAdulto2.this);
@@ -289,10 +289,6 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         intent.putExtra("teniaClave",teniaClave);
         startActivity(intent);
     }
-    public void asociarAdulto(){
-        Intent intent=new Intent(mainAdulto2.this,asociarAdultoActivity.class);
-        startActivity(intent);
-    }
 
     public void dialogoMostrarClave(String clave){
         AlertDialog.Builder builder= new AlertDialog.Builder(mainAdulto2.this);
@@ -326,7 +322,6 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         salio=true;
         Intent intent=new Intent(mainAdulto2.this,LoginActivity.class);
         startActivity(intent);
-        salio=true;
         finish();
 
     }
@@ -402,6 +397,8 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
 
                         insertarUbicacion(nameGetA,""+latitud,""+longitude);
                         if(salio==false){
+                            Toast.makeText(mainAdulto2.this, "Ubicación subida a la BD", Toast.LENGTH_SHORT).show();
+
                             countDownTimer();
                         }
 
@@ -427,7 +424,6 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
 
                 public void onFinish() {
                     ObtenerCoordendasActual();
-                    Toast.makeText(mainAdulto2.this, "Ubicación actualizada", Toast.LENGTH_SHORT).show();
                 }
             }.start();
         }

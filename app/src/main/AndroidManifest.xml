@@ -26,15 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ayudaUsuario"
-            android:exported="false" />
-        <activity
-            android:name=".ayudaResponsable"
-            android:exported="false" />
-        <activity
-            android:name=".ayudaAdulto"
-            android:exported="false" />
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -50,6 +42,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCYmA1T9T2zui92-3c84wdP8tZ-ftyh2pg" />
 
+        <activity
+            android:name=".ayudaUsuario"
+            android:exported="false" />
+        <activity
+            android:name=".ayudaResponsable"
+            android:exported="false" />
+        <activity
+            android:name=".ayudaAdulto"
+            android:exported="false" />
         <activity
             android:name=".MapsActivity2"
             android:exported="false"
@@ -82,13 +83,10 @@
             android:name=".NuevoActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
-
-        <activity
-            android:name=".LoginActivity"
-             />
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".RegistroActivity"
             android:parentActivityName=".MainActivity">
@@ -100,7 +98,6 @@
             android:name=".pantalla"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

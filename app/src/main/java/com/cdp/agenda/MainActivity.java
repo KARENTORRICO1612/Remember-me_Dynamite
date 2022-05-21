@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity  {
          idverLista.setOnClickListener(new View.OnClickListener() { //actualizar lista
             @Override
             public void onClick(View view) {
-                if(actualizado) {
+                if(spinner.getSelectedItem().toString()!=null) {
                     nomAdulto = spinner.getSelectedItem().toString();
                     Intent intent = new Intent(MainActivity.this, mainAdulto2.class);
                     intent.putExtra("usuarioLogin", nomAdulto);
@@ -116,11 +116,10 @@ public class MainActivity extends AppCompatActivity  {
            boton.setOnClickListener(new View.OnClickListener() {//boton actualuzar spinner creo
             @Override
             public void onClick(View view) {
-                if(!actualizado) {
-                    actualizado=true;
+                    listAdultos.clear();
                     String URL = "https://bdconandroidstudio.000webhostapp.com/adultosACargoDeResp.php?r_nombre=" + nameGetR;
                     buscarAdultos(URL);
-                }
+
             }
            });
 
@@ -130,7 +129,7 @@ public class MainActivity extends AppCompatActivity  {
             button.setOnClickListener(new View.OnClickListener() { //programar evento del adulto mayor
                 @Override
                 public void onClick(View view) {
-                    if(actualizado) {
+                    if(spinner.getSelectedItem().toString()!=null) {
                         nomAdulto = spinner.getSelectedItem().toString();
                         Intent i = new Intent(MainActivity.this, programareventodeAdultoMayor.class);
                         i.putExtra("usuarioLogin", nomAdulto);
@@ -153,11 +152,6 @@ public class MainActivity extends AppCompatActivity  {
 
 
     private void llenarSpinner() {
-        //ArrayList<Usuario> usuarios = new ArrayList<>();
-        //usuarios.add(new Usuario(1,"jose","Garcia","lopez"));
-        //usuarios.add(new Usuario(2,"luis","Pacheco","Hernandez"));
-        //usuarios.add(new Usuario(3,"macario","Choque","Mento"));
-       // usuarios.add(new Usuario(4,"maria","Alvarado","Veliz"));
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,listAdultos);
         spinner.setAdapter(adapter1);
