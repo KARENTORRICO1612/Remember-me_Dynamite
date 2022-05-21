@@ -14,9 +14,9 @@ public class ayudaUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ayuda_usuario);
 
-        /*VideoView mivdeo= findViewById(R.id.videoUsuario);
+        VideoView mivdeo= findViewById(R.id.videoUsuario);
 
-        String videop="android.resource://"+getPackageName()+"/" + R.raw.gato ;
+        String videop="android.resource://"+getPackageName()+"/" + R.raw.login ;
         Uri uri=  Uri.parse(videop);
         //Log.println(Log.ERROR, uri.toString(), "...");
 
@@ -26,6 +26,6 @@ public class ayudaUsuario extends AppCompatActivity {
         mivdeo.setMediaController(mediaController);
         mediaController.setAnchorView(mivdeo);
 
-        mivdeo.start();*/
+        mivdeo.start();
     }
 }

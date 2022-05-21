@@ -13,10 +13,10 @@ public class ayudaAdulto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ayuda_adulto);
-        /*
+
         VideoView mivdeo= findViewById(R.id.videoAdulto);
 
-        String videop="android.resource://"+getPackageName()+"/" + R.raw.jackson ;
+        String videop="android.resource://"+getPackageName()+"/" + R.raw.adulto ;
         Uri uri=  Uri.parse(videop);
         //Log.println(Log.ERROR, uri.toString(), "...");
 
@@ -26,6 +26,6 @@ public class ayudaAdulto extends AppCompatActivity {
         mivdeo.setMediaController(mediaController);
         mediaController.setAnchorView(mivdeo);
 
-        mivdeo.start();*/
+        mivdeo.start();
     }
 }

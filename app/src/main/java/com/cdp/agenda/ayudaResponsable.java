@@ -14,9 +14,9 @@ public class ayudaResponsable extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ayuda_responsable);
 
-        /*VideoView mivdeo= findViewById(R.id.videoResponsable);
+        VideoView mivdeo= findViewById(R.id.videoResponsable);
 
-        String videop="android.resource://"+getPackageName()+"/" + R.raw.gato ;
+        String videop="android.resource://"+getPackageName()+"/" + R.raw.reponsable ;
         Uri uri=  Uri.parse(videop);
         //Log.println(Log.ERROR, uri.toString(), "...");
 
@@ -26,6 +26,6 @@ public class ayudaResponsable extends AppCompatActivity {
         mivdeo.setMediaController(mediaController);
         mediaController.setAnchorView(mivdeo);
 
-        mivdeo.start();*/
+        mivdeo.start();
     }
 }
