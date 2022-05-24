@@ -233,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
             Log.i("TAG", "API >= 23");
             if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                 Log.i("TAG", "Permission granted");
-                Toast.makeText(this, "Permiso de ubicacion habilitado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "La ubicación está habilitada", Toast.LENGTH_SHORT).show();
 
             }else{
                 if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)){
@@ -251,7 +251,7 @@ public class LoginActivity extends AppCompatActivity {
             if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Log.i("TAG", "Permission granted(request)");
                 //
-                Toast.makeText(this, "ubicación habilitada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permiso de ubicación habilitado", Toast.LENGTH_SHORT).show(); //ubicación habilitada
                 verificarSesion();
             }else{
                 Log.i("TAG", "Permission denied(request)");
