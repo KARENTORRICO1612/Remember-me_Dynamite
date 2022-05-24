@@ -228,6 +228,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void solicitarPermisosUbicacion(){
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Toast.makeText(this, "La ubicación está habilitada", Toast.LENGTH_SHORT).show();
             verificarSesion();
         }else{
             Log.i("TAG", "API >= 23");
