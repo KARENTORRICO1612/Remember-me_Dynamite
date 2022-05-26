@@ -1,10 +1,5 @@
 package com.cdp.agenda;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -22,6 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -114,8 +114,13 @@ public class LoginActivity extends AppCompatActivity {
                         String contrasenia="";
                         String userr="";
                         try {
-                            contrasenia= response.getString("contrasenia").toString();
-                            userr= response.getString("nombre_a").toString();
+                            contrasenia= response.getString("contrasenia");
+
+                                    if(rol.equals("adulto")){
+                                        userr=response.getString("nombre_a");
+                                    }else{
+                                        userr=response.getString("nombre_r");
+                                    }
 
 
                             if (contrasenia.equals(contra)) {

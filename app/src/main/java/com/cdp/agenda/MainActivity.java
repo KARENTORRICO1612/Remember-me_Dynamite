@@ -228,6 +228,7 @@ public class MainActivity extends AppCompatActivity  {
     public void asociarAdulto(){
         Intent intent=new Intent(MainActivity.this,asociarAdultoActivity.class);
         intent.putExtra("nombreResp",nameGetR);
+        intent.putExtra("listaAdultos", listAdultos);
         startActivity(intent);
     }
     public void cerrarSR(){

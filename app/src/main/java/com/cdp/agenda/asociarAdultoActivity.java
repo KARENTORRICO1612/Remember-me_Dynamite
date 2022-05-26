@@ -1,15 +1,14 @@
 package com.cdp.agenda;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -23,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +33,7 @@ public class asociarAdultoActivity extends AppCompatActivity {
     private String nomAdulto;
     private String claveCnx;
     private String nomResponsable;
+    private ArrayList<String> listaAdultos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,15 @@ public class asociarAdultoActivity extends AppCompatActivity {
         txtNombreAdulto = findViewById(R.id.txtNomAdulto);
         txtClaveCnx = findViewById(R.id.txtClaveCnx);
         btnAsociar = findViewById(R.id.btnAsociar);
+       listaAdultos=(ArrayList<String>) getIntent().getStringArrayListExtra("listaAdultos");
         nomResponsable=getIntent().getStringExtra("nombreResp");
         configurarPantalla();
         btnAsociar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                verificarNomUsuario();
+
+                    verificarNomUsuario();
+
             }
         });
     }
@@ -62,39 +66,44 @@ public class asociarAdultoActivity extends AppCompatActivity {
 
     }
     private void verificarNomUsuario(){
-        Toast.makeText(getApplicationContext(), "Buscando...", Toast.LENGTH_SHORT).show();
         nomAdulto = txtNombreAdulto.getText().toString().trim();
         claveCnx = txtClaveCnx.getText().toString().trim();
-        String URL = "https://bdconandroidstudio.000webhostapp.com/verSoloNomAdulJson.php?nombre_a="+nomAdulto;
-        JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(
-                Request.Method.GET,
-                URL,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                            String claveConexion="";
+
+        if(!listaAdultos.contains(nomAdulto)) {
+            Toast.makeText(getApplicationContext(), "Buscando...", Toast.LENGTH_SHORT).show();
+            String URL = "https://bdconandroidstudio.000webhostapp.com/verSoloNomAdulJson.php?nombre_a=" + nomAdulto;
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.GET,
+                    URL,
+                    null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            String claveConexion = "";
                             try {
-                                claveConexion= response.getString("clave_con");
-                                if(claveConexion.equals(claveCnx)){
+                                claveConexion = response.getString("clave_con");
+                                if (claveConexion.equals(claveCnx)) {
                                     asociar();
-                                }else{
-                                    Toast.makeText(getApplicationContext(),"Datos Incorrectos",Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Datos Incorrectos", Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(getApplicationContext(),"Nombre incorrecto",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Nombre incorrecto", Toast.LENGTH_SHORT).show();
                             }
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(),"Usuario, contraseña o rol incorrectos",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Usuario, contraseña o rol incorrectos", Toast.LENGTH_SHORT).show();
                         }
                     }
             );
-        requestQueue.add(jsonObjectRequest);
+            requestQueue.add(jsonObjectRequest);
+        }else{
+            Toast.makeText(getApplicationContext(), "Ya tienes agregado a " + nomAdulto, Toast.LENGTH_LONG).show();
+        }
     }
 
     public void asociar(){

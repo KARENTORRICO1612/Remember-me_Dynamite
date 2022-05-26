@@ -38,10 +38,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_bordes_redondeados"
-                    android:backgroundTint="@color/colorPrimary"
+
                     android:text="Adulto Mayor:"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="14dp" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -50,19 +54,28 @@
                 <EditText
                     android:id="@+id/txtNomAdulto"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="#FFFFFF"
                     android:ems="10"
                     android:inputType="textPersonName" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp" />
 
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_bordes_redondeados"
-                    android:backgroundTint="@color/colorPrimary"
+
                     android:text="Clave de Conexión:"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -71,13 +84,14 @@
                 <EditText
                     android:id="@+id/txtClaveCnx"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="34dp"
+                    android:background="#FFFFFF"
                     android:ems="10"
                     android:inputType="textPersonName" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="47dp" />
+                    android:layout_height="28dp" />
 
                 <Button
                     android:id="@+id/btnAsociar"

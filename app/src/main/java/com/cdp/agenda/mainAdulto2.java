@@ -292,8 +292,8 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
 
     public void dialogoMostrarClave(String clave){
         AlertDialog.Builder builder= new AlertDialog.Builder(mainAdulto2.this);
-        builder.setTitle("Clave de Conexión");
-        builder.setMessage("Clave Actual: "+clave)
+       // builder.setTitle(Html.fromHtml("<h4>Clave de conexión</h4<br/><br/>"));
+        builder.setTitle(Html.fromHtml("<h5>Clave Actual: <font color='#005F73'>"+clave+"</font></h5>"))
                 .setPositiveButton(Html.fromHtml("<font color='#005F73'>Editar</font>"), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

@@ -1,15 +1,12 @@
 package com.cdp.agenda;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.jetbrains.annotations.Nullable;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,9 +20,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cdp.agenda.adaptadores.ListaContactosAdapter;
-import com.cdp.agenda.entidades.Contactos;
 
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,16 +93,20 @@ public class crearClaveActivity extends AppCompatActivity {
     public void guardar(){
         clave = txtClave.getText().toString().trim();
         claveConfirmacion = txtConfirmar.getText().toString().trim();
-        if((clave.length()>10)){
+        if(clave.length()==0 || claveConfirmacion.length()==0){
+            Toast.makeText(getApplicationContext(),"Debe llenar todos los campos",Toast.LENGTH_LONG).show();
+        }
+        else if((clave.length()>10)){
             Toast.makeText(getApplicationContext(),"Clave demasiada larga, máximo 10 caracteres",Toast.LENGTH_LONG).show();
         }else if(clave.length()<8){
             Toast.makeText(getApplicationContext(),"Clave demasiada corta, mínimo 8 caracteres",Toast.LENGTH_LONG).show();
-        }else if(!clave.equals(claveConfirmacion)){
+        }else if((clave.length()>10)){
+            Toast.makeText(getApplicationContext(),"Clave demasiada larga, máximo 10 caracteres",Toast.LENGTH_LONG).show();
+        }
+        else if(!clave.equals(claveConfirmacion)){
             Toast.makeText(getApplicationContext(),"Las claves no coinciden",Toast.LENGTH_SHORT).show();
         }else if(lista.contains(clave)){
             Toast.makeText(getApplicationContext(),"Intente con otra clave",Toast.LENGTH_SHORT).show();
-        }else if(clave.length()==0 || claveConfirmacion.length()==0){
-            Toast.makeText(getApplicationContext(),"Error: Debe llenar todos los campos",Toast.LENGTH_LONG).show();
         }else {
             modificarClaveUsuario(clave, nomDeUsuario);
         }
