@@ -9,8 +9,8 @@
     tools:context=".crearClaveActivity">
 
     <LinearLayout
-        android:layout_width="311dp"
-        android:layout_height="564dp"
+        android:layout_width="277dp"
+        android:layout_height="541dp"
 
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +30,7 @@
 
         <Space
             android:layout_width="316dp"
-            android:layout_height="29dp" />
+            android:layout_height="27dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +89,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="45dp" />
+                android:layout_height="35dp" />
 
         </LinearLayout>
 
