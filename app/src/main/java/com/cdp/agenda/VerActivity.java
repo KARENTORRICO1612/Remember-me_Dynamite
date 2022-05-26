@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -191,6 +192,12 @@ public class VerActivity extends AppCompatActivity {
                             eFecha.setText(fecha);
                             txtDireccion.setText(direccion);
                             txtDescripcion.setText(descripcion);
+
+                            txtTitulo.setInputType(InputType.TYPE_NULL);
+                            eHora.setInputType(InputType.TYPE_NULL);
+                            eFecha.setInputType(InputType.TYPE_NULL);
+                            txtDireccion.setInputType(InputType.TYPE_NULL);
+                            txtDescripcion.setInputType(InputType.TYPE_NULL);
 
 
 
