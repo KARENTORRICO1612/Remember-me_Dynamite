@@ -96,7 +96,7 @@ public class asociarAdultoActivity extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), "Usuario, contraseña o rol incorrectos", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Error al acceder a la Base de datos", Toast.LENGTH_SHORT).show();
                         }
                     }
             );
