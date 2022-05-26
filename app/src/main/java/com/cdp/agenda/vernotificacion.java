@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class vernotificacion extends AppCompatActivity {
 
-    EditText txtTitulo, txtDireccion, txtDescripcion;
+    TextView txtTitulo, txtDireccion, txtDescripcion;
     //FloatingActionButton btn1;
     FloatingActionButton fabEliminar;
     TextView eFecha,eHora;
