@@ -24,8 +24,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -102,10 +106,10 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                         if (nom.length() <= 20 && con.length() <= 20) {
                             if (con.equals(confiCon)) {
                                 if (r.equals("Adulto")) {
-                                    registrarAdulto(nom, con);
+                                    verificarAdulto(nom, con);
                                 }
                                 if (r.equals("Responsable")) {
-                                    registrarResponsable(nom, con);
+                                    verificarResponsable(nom, con);
                                 }
                             } else {
                                 Toast.makeText(RegistroActivity.this, "Las contraseñas no Coinciden", Toast.LENGTH_SHORT).show();
@@ -169,6 +173,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                         Toast.makeText(RegistroActivity.this, "Usuario Registrado", Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(RegistroActivity.this,LoginActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 },
                 new Response.ErrorListener() {
@@ -200,6 +205,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                         Toast.makeText(RegistroActivity.this, "Usuario Registrado", Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(RegistroActivity.this,LoginActivity.class);
                         startActivity(intent);
+                        finish();
 
                     }
                 },
@@ -225,5 +231,89 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         Intent intent= new Intent(RegistroActivity.this,LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+    private void verificarAdulto(String nom, String con){
+
+        String URL = "https://bdconandroidstudio.000webhostapp.com/verSoloNomAdulJson.php?nombre_a="+nom;
+
+        JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        String contrasenia="";
+                        try {
+                            contrasenia= response.getString("contrasenia").toString();
+
+
+                            if (!contrasenia.equals("")) {
+                                Toast.makeText(RegistroActivity.this, "El nombre de usuario ya esta en uso", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            registrarAdulto(nom, con);
+                            e.printStackTrace();
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+
+        requestQueue.add(jsonObjectRequest);
+
+    }
+
+
+    private void verificarResponsable(String nom, String con){
+
+        String URL = "https://bdconandroidstudio.000webhostapp.com/verSoloNomRespJson.php?nombre_r="+nom;
+
+        JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        String contrasenia="";
+                        try {
+                            contrasenia= response.getString("contrasenia").toString();
+
+
+                            if (!contrasenia.equals("")) {
+                                Toast.makeText(RegistroActivity.this, "El nombre de usuario ya esta en uso", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            registrarResponsable(nom, con);
+                            e.printStackTrace();
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+
+        requestQueue.add(jsonObjectRequest);
+
     }
 }

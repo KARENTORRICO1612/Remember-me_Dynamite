@@ -112,8 +112,10 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
 
                         String contrasenia="";
+                        String userr="";
                         try {
                             contrasenia= response.getString("contrasenia").toString();
+                            userr= response.getString("nombre_a").toString();
 
 
                             if (contrasenia.equals(contra)) {
@@ -123,10 +125,10 @@ public class LoginActivity extends AppCompatActivity {
                                     guardarSesion("Adulto");
                                     Intent intent = new Intent(LoginActivity.this, mainAdulto2.class);
                                     intent.putExtra("tipoDeUsuario",tUser);
-                                    intent.putExtra("usuarioLogin",usuario);
+                                    intent.putExtra("usuarioLogin",userr);
                                     intent.putExtra("contraseniaLogin",contra);
                                     startActivity(intent);
-                                    Toast.makeText(LoginActivity.this, "Bienvenido "+usuario, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Bienvenido "+userr, Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                                 if(rol.equals("responsable")){
@@ -134,10 +136,10 @@ public class LoginActivity extends AppCompatActivity {
                                     guardarSesion("Responsable");
                                     Intent intent= new Intent(LoginActivity.this,MainActivity.class);//ventana del responsable
                                     intent.putExtra("tipoDeUsuario",tUser);
-                                    intent.putExtra("usuarioLogin",usuario);
+                                    intent.putExtra("usuarioLogin",userr);
                                     intent.putExtra("contraseniaLogin",contra);
                                     startActivity(intent);
-                                    Toast.makeText(LoginActivity.this, "Bienvenido "+usuario, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Bienvenido "+userr, Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             }

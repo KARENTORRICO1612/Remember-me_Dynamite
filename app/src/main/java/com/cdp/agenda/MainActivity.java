@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity  {
          idverLista.setOnClickListener(new View.OnClickListener() { //actualizar lista
             @Override
             public void onClick(View view) {
-                if(spinner.getSelectedItem().toString()!=null) {
+                if(spinner.getSelectedItem()!=null) {
                     nomAdulto = spinner.getSelectedItem().toString();
                     Intent intent = new Intent(MainActivity.this, mainAdulto2.class);
                     intent.putExtra("usuarioLogin", nomAdulto);
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity  {
             button.setOnClickListener(new View.OnClickListener() { //programar evento del adulto mayor
                 @Override
                 public void onClick(View view) {
-                    if(spinner.getSelectedItem().toString()!=null) {
+                    if(spinner.getSelectedItem()!=null) {
                         nomAdulto = spinner.getSelectedItem().toString();
                         Intent i = new Intent(MainActivity.this, programareventodeAdultoMayor.class);
                         i.putExtra("usuarioLogin", nomAdulto);
@@ -142,10 +142,12 @@ public class MainActivity extends AppCompatActivity  {
             verUbicacion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getUbicacion(spinner.getSelectedItem().toString());
-                    /*Intent intent= new Intent(MainActivity.this,MapsActivity.class);
-                    intent.putExtra("nameA",spinner.getSelectedItem().toString());
-                    startActivity(intent);*/
+                    if(spinner.getSelectedItem()!=null) {
+                        getUbicacion(spinner.getSelectedItem().toString());
+                    }else{
+                        Toast.makeText(MainActivity.this, "Seleccione un Adulto", Toast.LENGTH_LONG).show();
+                    }
+
                 }
             });
     }
