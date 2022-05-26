@@ -397,7 +397,6 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
 
                         insertarUbicacion(nameGetA,""+latitud,""+longitude);
                         if(salio==false){
-                            Toast.makeText(mainAdulto2.this, "Ubicación subida a la BD", Toast.LENGTH_SHORT).show();
 
                             countDownTimer();
                         }

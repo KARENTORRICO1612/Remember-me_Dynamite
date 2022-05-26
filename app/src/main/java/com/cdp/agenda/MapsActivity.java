@@ -132,7 +132,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             public void onFinish() {
                 onMapReady(mMap);
-                Toast.makeText(MapsActivity.this, "Ubicación actualizada", Toast.LENGTH_SHORT).show();
             }
         }.start();
     }
