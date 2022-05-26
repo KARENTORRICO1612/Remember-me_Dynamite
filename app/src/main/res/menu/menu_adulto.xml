@@ -12,5 +12,5 @@
 
     <item
         android:id="@+id/cerrarA"
-        android:title="Cerrar Sesión" />
+        android:title="Cerrar sesión" />
 </menu>
