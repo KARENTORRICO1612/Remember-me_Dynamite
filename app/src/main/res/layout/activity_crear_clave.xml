@@ -55,6 +55,7 @@
                 android:id="@+id/txtClave"
                 android:layout_width="match_parent"
                 android:layout_height="39dp"
+                android:paddingLeft="5dp"
                 android:background="#FFFFFF"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -84,6 +85,7 @@
                 android:layout_height="42dp"
                 android:background="#FFFFFF"
                 android:ems="10"
+                android:paddingLeft="5dp"
                 android:inputType="textPersonName"
                 android:textColor="#000000" />
 
