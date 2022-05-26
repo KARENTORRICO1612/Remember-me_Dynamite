@@ -114,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                         String contrasenia="";
                         String userr="";
                         try {
+
                             contrasenia= response.getString("contrasenia");
 
                                     if(rol.equals("adulto")){
@@ -121,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }else{
                                         userr=response.getString("nombre_r");
                                     }
+
 
 
                             if (contrasenia.equals(contra)) {
