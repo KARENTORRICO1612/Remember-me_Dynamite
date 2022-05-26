@@ -115,7 +115,11 @@ public class LoginActivity extends AppCompatActivity {
                         String userr="";
                         try {
                             contrasenia= response.getString("contrasenia").toString();
-                            userr= response.getString("nombre_a").toString();
+                            if(rol=="adulto"){
+                                userr= response.getString("nombre_a").toString();
+                            }else{
+                                userr= response.getString("nombre_r").toString();
+                            }
 
 
                             if (contrasenia.equals(contra)) {
