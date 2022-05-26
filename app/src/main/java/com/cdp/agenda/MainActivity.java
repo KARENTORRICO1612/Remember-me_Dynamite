@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity  {
          idverLista.setOnClickListener(new View.OnClickListener() { //actualizar lista
             @Override
             public void onClick(View view) {
-                if(spinner.getSelectedItem()!=null) {
+                if(spinner.getSelectedItem()!=null && spinner.getSelectedItem()!=" ") {
                     nomAdulto = spinner.getSelectedItem().toString();
                     Intent intent = new Intent(MainActivity.this, mainAdulto2.class);
                     intent.putExtra("usuarioLogin", nomAdulto);
@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                     listAdultos.clear();
+                    listAdultos.add(" ");
                     String URL = "https://bdconandroidstudio.000webhostapp.com/adultosACargoDeResp.php?r_nombre=" + nameGetR;
                     buscarAdultos(URL);
 
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity  {
             button.setOnClickListener(new View.OnClickListener() { //programar evento del adulto mayor
                 @Override
                 public void onClick(View view) {
-                    if(spinner.getSelectedItem()!=null) {
+                    if(spinner.getSelectedItem()!=null && spinner.getSelectedItem()!=" ") {
                         nomAdulto = spinner.getSelectedItem().toString();
                         Intent i = new Intent(MainActivity.this, programareventodeAdultoMayor.class);
                         i.putExtra("usuarioLogin", nomAdulto);
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity  {
             verUbicacion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(spinner.getSelectedItem()!=null) {
+                    if(spinner.getSelectedItem()!=null && spinner.getSelectedItem()!=" ") {
                         getUbicacion(spinner.getSelectedItem().toString());
                     }else{
                         Toast.makeText(MainActivity.this, "Seleccione un Adulto", Toast.LENGTH_LONG).show();
@@ -162,7 +163,11 @@ public class MainActivity extends AppCompatActivity  {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this,"Adulto seleccionado", Toast.LENGTH_SHORT).show();
+                if(spinner.getSelectedItem()!=null && spinner.getSelectedItem()!=" ") {
+                    Toast.makeText(MainActivity.this,"Adulto seleccionado", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(MainActivity.this, "Lista actualizada", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
