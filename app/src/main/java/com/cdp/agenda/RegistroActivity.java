@@ -198,6 +198,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(RegistroActivity.this, "Usuario Registrado", Toast.LENGTH_SHORT).show();
+                        Intent intent= new Intent(RegistroActivity.this,LoginActivity.class);
+                        startActivity(intent);
                     }
                 },
                 new Response.ErrorListener() {
