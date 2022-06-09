@@ -78,6 +78,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
     TextView nameuser2;
     public static final int REQUEST_CODE = 1;
     private boolean salio;
+    private ArrayList<String> misEventos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
         nameuser2=findViewById(R.id.nameUs);
         salio=false;
         listaContactos.setLayoutManager(new LinearLayoutManager(this));
-
+        misEventos=new ArrayList<>();
           if(getIntent().getExtras()!=null) {
 
           }
@@ -153,6 +154,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
                         contacto.setDescripcion(jsonObject.getString("descripcion"));
                         contacto.setAdulto_r(jsonObject.getString("adulto_r"));
                         lista.add(contacto);
+                        misEventos.add(jsonObject.getString("titulo"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -329,6 +331,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
     private void nuevoRegistro(){
         Intent intent = new Intent(mainAdulto2.this, NuevoActivity.class);
         intent.putExtra("nombreAdulto",nameGetA);
+        intent.putExtra("misevent",misEventos);
         startActivity(intent);
         finish();
     }
@@ -414,7 +417,7 @@ public class mainAdulto2 extends AppCompatActivity implements SearchView.OnQuery
 
     private void countDownTimer() {
         if(salio==false){
-            new CountDownTimer(15000, 1000) {
+            new CountDownTimer(10000, 1000) {
 
                 public void onTick(long millisUntilFinished) {
                     // Toast.makeText(MapsActivity.this, "Faltan "+millisUntilFinished/1000+" segundos", Toast.LENGTH_SHORT).show();

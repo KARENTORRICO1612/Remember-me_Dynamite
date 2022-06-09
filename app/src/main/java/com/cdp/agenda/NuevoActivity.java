@@ -32,14 +32,22 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cdp.agenda.adaptadores.ListaContactosAdapter;
 import com.cdp.agenda.db.DbContactos;
+import com.cdp.agenda.entidades.Contactos;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,6 +61,7 @@ public class NuevoActivity extends AppCompatActivity {
 
     private String titulo,time,fecha,direccion,descripcion;
     private String nomAdulto;
+    private ArrayList<String > misevent;
     RequestQueue requestQueue;
 
     private int dia, mes, anio, hora, minutos;
@@ -68,6 +77,7 @@ public class NuevoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nuevo);
         requestQueue= Volley.newRequestQueue(this);
         nomAdulto=getIntent().getStringExtra("nombreAdulto");
+        misevent=getIntent().getStringArrayListExtra("misevent");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -100,37 +110,43 @@ public class NuevoActivity extends AppCompatActivity {
 
                 if (!txtTitulo.getText().toString().trim().isEmpty()
                         && !eFecha.getText().toString().equals("")&& !eHora.getText().toString().equals("")) {
-                    registrarActivity(titulo,time,fecha,direccion,descripcion,nomAdulto);
-                    String[] parts = txtTitulo.getText().toString().split("");
-                    String primero  =parts[0];
-                    if (primero.equals(" ")){
-                        Toast.makeText(NuevoActivity.this, "Llenar campo de Tìtulo", Toast.LENGTH_LONG).show();
-                        return;
+                    if(existeEvento(titulo)==false){
+                        registrarActivity(titulo,time,fecha,direccion,descripcion,nomAdulto);
+                        String[] parts = txtTitulo.getText().toString().split("");
+                        String primero  =parts[0];
+                        if (primero.equals(" ")){
+                            Toast.makeText(NuevoActivity.this, "Llenar campo de Tìtulo", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        DbContactos dbContactos = new DbContactos(NuevoActivity.this);
+
+                        //crearAlarma
+
+                        Calendar today = Calendar.getInstance();
+
+                        today.set(GESTION, MES, DIA, HORA, MINUTO, 0);
+
+
+
+                        Utils.setAlarm(alarmID, today.getTimeInMillis(), NuevoActivity.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString(), eFecha.getText().toString(), eHora.getText().toString(),txtDireccion.getText().toString());
+
+
+
+                        //Toast.makeText(NuevoActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
+
+                        //long id = dbContactos.insertarContacto(titulo,time,fecha,direccion,descripcion);
+
+                        //if (id > 0) {
+                        //Toast.makeText(NuevoActivity.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
+                        //} else {
+                        // Toast.makeText(NuevoActivity.this, "ERROR AL GUARDAR REGISTRO", Toast.LENGTH_LONG).show();
+                        //}
+                    }else{
+                        Toast.makeText(NuevoActivity.this, "Nombre de evento ya existe", Toast.LENGTH_SHORT).show();
                     }
 
-                    DbContactos dbContactos = new DbContactos(NuevoActivity.this);
 
-                    //crearAlarma
-
-                    Calendar today = Calendar.getInstance();
-
-                    today.set(GESTION, MES, DIA, HORA, MINUTO, 0);
-
-
-
-                    Utils.setAlarm(alarmID, today.getTimeInMillis(), NuevoActivity.this, txtTitulo.getText().toString(), txtDescripcion.getText().toString(), eFecha.getText().toString(), eHora.getText().toString(),txtDireccion.getText().toString());
-
-
-
-                    //Toast.makeText(NuevoActivity.this, ""+today.getTimeInMillis(), Toast.LENGTH_LONG).show();
-
-                    //long id = dbContactos.insertarContacto(titulo,time,fecha,direccion,descripcion);
-
-                    //if (id > 0) {
-                        //Toast.makeText(NuevoActivity.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
-                    //} else {
-                       // Toast.makeText(NuevoActivity.this, "ERROR AL GUARDAR REGISTRO", Toast.LENGTH_LONG).show();
-                    //}
                 } else {
                     eHora.setError("");
                     eFecha.setError("");
@@ -376,5 +392,13 @@ public class NuevoActivity extends AppCompatActivity {
         }catch (Exception ex){
             System.out.println("Error es :" + ex);
         }
+    }
+    public boolean existeEvento(String titu){
+        for (int i=0;i<misevent.size();i++){
+            if(titu.equals(misevent.get(i))){
+                return true;
+            }
+        }
+        return false;
     }
 }
